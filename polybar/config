@@ -14,7 +14,7 @@ include-directory = /home/ali/.config/polybar/modules/
 bottom = false
 fixed-center = true
 
-width = 1920
+width = 1900
 height = 30
 
 offset-x = 10
