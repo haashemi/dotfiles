@@ -1,0 +1,77 @@
+
+## Layout Modes
+bindsym $mod+s           layout stacking
+bindsym $mod+w           layout tabbed
+bindsym $mod+e           layout toggle split
+bindsym $mod+f           fullscreen toggle
+
+bindsym $mod+u            border none
+bindsym $mod+n            border normal
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s     sticky toggle
+bindsym $mod+Shift+c     move position center
+
+bindsym $mod+m           move workspace to output left
+
+bindsym $mod+Ctrl+Right      workspace next
+bindsym $mod+Ctrl+Left      workspace prev
+
+bindsym $mod+BackSpace   workspace back_and_forth
+
+## Scratchpad
+bindsym $mod+minus                          scratchpad show
+bindsym $mod+Shift+minus                    move scratchpad
+
+## Split
+bindsym $mod+b                              split h
+bindsym $mod+v                              split v
+
+## Focus
+bindsym $mod+h                              focus left
+bindsym $mod+j                              focus down
+bindsym $mod+k                              focus up
+bindsym $mod+l                              focus right
+
+bindsym $mod+Left                           focus left
+bindsym $mod+Down                           focus down
+bindsym $mod+Up                             focus up
+bindsym $mod+Right                          focus right
+
+bindsym $mod+a                              focus parent
+bindsym $mod+space                          focus mode_toggle
+
+bindsym Mod1+Tab                            workspace next
+bindsym Mod1+Shift+Tab                      workspace prev
+
+# Apps
+
+## Essential
+bindsym $mod+Shift+Return                   exec --no-startup-id alacritty -d "`xcwd`"
+
+bindsym $mod+d                              exec --no-startup-id dmenu_recency
+# bindsym $mod+d                              exec --no-startup-id sdmenu -l 100 -h 25 -w 300
+# bindsym $mod+d                              exec --no-startup-id rofi -show
+bindsym $mod+z                              exec --no-startup-id morc_menu
+bindsym $mod+Delete                         exec --no-startup-id sklock
+
+## General
+bindsym $mod+F2                             exec --no-startup-id brave
+bindsym $mod+F3                             exec --no-startup-id code
+bindsym $mod+F4                             exec --no-startup-id pcmanfm
+bindsym $mod+F5                             exec --no-startup-id alacritty --title 'mocp' -e run-mocp
+bindsym $mod+Shift+F4                       exec --no-startup-id gksu pcmanfm
+
+## Utility
+
+bindsym $mod+p                              [class="pomotroid"] scratchpad show
+bindsym $mod+Shift+p                        exec --no-startup-id pomotroid
+
+bindsym $mod+Ctrl+t                         exec --no-startup-id picom -b
+bindsym $mod+Ctrl+x             --release   exec --no-startup-id xkill
+bindsym $mod+Shift+d            --release   exec --no-startup-id killall dunst; exec notify-send 'restart dunst'
+
+## Screenshot
+bindsym Print                   --release   exec --no-startup-id flameshot full -c
+bindsym $mod+Print              --release   exec --no-startup-id flameshot full -p "$XDG_PICTURES_DIR/screenshots/"
+bindsym $mod+Shift+Print        --release   exec --no-startup-id flameshot gui
