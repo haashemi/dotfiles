@@ -100,7 +100,7 @@
     "tooltip-format-wifi": " {essid}\n{ipaddr}",
     "tooltip-format-ethernet": " {ipaddr}",
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "on-click": "nm-connection-editor",
+    "on-click": "alacritty -e nmtui",
   },
 
   "pulseaudio": {
