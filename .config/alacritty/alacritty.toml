@@ -1,10 +1,12 @@
+# https://alacritty.org/config-alacritty.html
 [env]
 TERM = "xterm-256color"
 
 [window]
+padding = { x = 15, y = 10 }
 dynamic_padding = true
 decorations = "None"
-opacity = 0.80
+opacity = 0.9
 startup_mode = "Maximized"
 decorations_theme_variant = "Dark"
 
