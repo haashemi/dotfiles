@@ -1,0 +1,91 @@
+{
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[astro][svelte][typescript][javascript][typescriptreact][javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[css][html][json][jsonc][mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.foldingMaximumRegions": 65000,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.largeFileOptimizations": false,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "editor.smoothScrolling": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.includeStrings": false,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.wordWrap": "off",
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.format.enable": true,
+  "eslint.validate": ["astro", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"],
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.fileNesting.patterns": {
+    "*.db": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.s3db": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.ts": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+    "tsconfig.json": "tsconfig.*.json"
+  },
+  "extensions.autoUpdate": true,
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true
+  },
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "never",
+  "go.lintFlags": ["--fast"],
+  "go.lintTool": "golangci-lint",
+  "go.toolsManagement.autoUpdate": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "json.maxItemsComputed": 1000000,
+  "prettier.enable": true,
+  "prettier.printWidth": 150,
+  "redhat.telemetry.enabled": false,
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "svelte.enable-ts-plugin": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.explorerKind": "both",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.customTitleBarVisibility": "auto",
+  "window.menuBarVisibility": "compact",
+  "workbench.activityBar.location": "top",
+  "workbench.colorTheme": "Material Theme Darker High Contrast",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.statusBar.visible": true
+}
