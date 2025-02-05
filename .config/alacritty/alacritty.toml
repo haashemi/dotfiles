@@ -15,9 +15,4 @@ save_to_clipboard = true
 style = { blinking = "On" }
 
 [keyboard]
-bindings = [
-
-    { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-    # F11 = Toggle Fullscreen
-    { key = "F11", action = "ToggleFullscreen" },
-]
+bindings = [{ key = "F11", action = "ToggleFullscreen" }]
