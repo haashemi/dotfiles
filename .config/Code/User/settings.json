@@ -60,8 +60,22 @@
     "**/.hg": true,
     "**/.svn": true,
     "**/CVS": true,
-    "**/Thumbs.db": true,
-    "**/node_modules": true
+    "**/Thumbs.db": true
+    // "**/node_modules": true
+  },
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["alejandra"]
+      },
+      "options": {
+        "nixos": {
+          "expr": "(builtins.getFlake \"~/code/nixos\").nixosConfigurations.<name>.options"
+        }
+      }
+    }
   },
   "git.autofetch": true,
   "git.confirmSync": false,
