@@ -92,6 +92,17 @@
     "format-fa": "FA"
   },
 
+  "mpris": {
+    "player": "tidal-hifi",
+    "format": "{status_icon} {dynamic}",
+    "dynamic-order": ["title", "artist", "position", "length"],
+    "status-icons": {
+      "playing": "󰝚",
+      "paused": "󰏤",
+      "stopped": "󰓛"
+    }
+  },
+
   "network": {
     "format-wifi": "󰤨",
     "format-ethernet": "",

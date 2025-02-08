@@ -37,6 +37,7 @@ tooltip * {
 }
 
 #workspaces,
+#mpris,
 #tray,
 #statuses,
 #common,
@@ -62,6 +63,15 @@ tooltip * {
 #workspaces button:hover {
   background-color: @overlay2;
   border-radius: 5px;
+}
+
+/* ****************************** */
+/* MPRIS Style                    */
+#mpris {
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
 }
 
 /* ****************************** */
