@@ -93,7 +93,6 @@
   },
 
   "mpris": {
-    "player": "tidal-hifi",
     "format": "{status_icon} {dynamic}",
     "dynamic-order": ["title", "artist", "position", "length"],
     "status-icons": {
