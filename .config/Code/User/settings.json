@@ -10,7 +10,6 @@
   },
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.foldingMaximumRegions": 65000,
-  "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'ZedMono Nerd Font Mono'",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
@@ -43,20 +42,6 @@
   "go.toolsManagement.autoUpdate": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "json.maxItemsComputed": 1000000,
-  "nix.enableLanguageServer": true,
-  "nix.serverPath": "nixd",
-  "nix.serverSettings": {
-    "nixd": {
-      "formatting": {
-        "command": ["alejandra"]
-      },
-      "options": {
-        "nixos": {
-          "expr": "(builtins.getFlake \"~/code/nixos\").nixosConfigurations.<name>.options"
-        }
-      }
-    }
-  },
   "prettier.printWidth": 128,
   "redhat.telemetry.enabled": false,
   "svelte.enable-ts-plugin": true,
@@ -66,5 +51,7 @@
   "window.zoomLevel": 1.5,
   "workbench.activityBar.location": "top",
   "workbench.colorTheme": "Material Theme Darker High Contrast",
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+  "git.openRepositoryInParentFolders": "always",
+  "security.workspace.trust.untrustedFiles": "open"
 }
