@@ -5,7 +5,7 @@
   border: none;
   min-height: 0;
   border-radius: 0;
-  font-family: "CodeNewRoman Nerd Font Propo";
+  font-family: "Fira Code Nerd Font";
   font-size: 13px;
 
   margin-left: 5px;
@@ -15,7 +15,7 @@
 window#waybar {
   all: unset;
   background: @crust;
-  /* border-radius: 13px; */
+  border-radius: 10px;
 }
 
 tooltip {
