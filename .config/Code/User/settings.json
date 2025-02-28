@@ -8,6 +8,8 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "astro.content-intellisense": true,
+  "astro.updateImportsOnFileMove.enabled": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.foldingMaximumRegions": 65000,
   "editor.fontLigatures": true,
@@ -24,7 +26,14 @@
   "editor.wordWrap": "off",
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.format.enable": true,
-  "eslint.validate": ["astro", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"],
+  "eslint.validate": [
+    "astro", // Enable .astro
+    "javascript",
+    "javascriptreact",
+    "typescript", // Enable .ts
+    "typescriptreact", // Enable .tsx
+    "svelte"
+  ],
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -39,19 +48,20 @@
     "**/Thumbs.db": true
   },
   "git.autofetch": true,
+  "git.openRepositoryInParentFolders": "always",
   "go.toolsManagement.autoUpdate": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "json.maxItemsComputed": 1000000,
   "prettier.printWidth": 128,
   "redhat.telemetry.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
   "svelte.enable-ts-plugin": true,
   "telemetry.telemetryLevel": "off",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "vsicons.dontShowNewVersionMessage": true,
   "window.customTitleBarVisibility": "auto",
   "window.menuBarVisibility": "toggle",
-  "window.zoomLevel": 1.5,
+  "window.zoomLevel": 3,
   "workbench.activityBar.location": "top",
-  "workbench.colorTheme": "Material Theme Darker High Contrast",
-  "workbench.iconTheme": "vscode-icons",
-  "git.openRepositoryInParentFolders": "always",
-  "security.workspace.trust.untrustedFiles": "open"
+  "workbench.iconTheme": "vscode-icons"
 }
