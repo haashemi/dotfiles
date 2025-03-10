@@ -1,3 +1,3 @@
-# Dotfiles
+## ![Preview](./preview.png)
 
-Here are my personal dotfiles, managed with `stow`.
+My personal dotfiles, managed with `stow`.
