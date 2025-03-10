@@ -78,8 +78,7 @@
   "hyprland/window": {
     "format": "{title}",
     "rewrite": {
-      "(.*) - Google Chrome": "$1",
-      "": "Welcome to my NixOS shit"
+      "(.*) - Google Chrome": "$1"
     },
     "icon": true,
     "icon-size": 18,
