@@ -59,9 +59,10 @@
   "telemetry.telemetryLevel": "off",
   "typescript.inlayHints.parameterNames.enabled": "all",
   "vsicons.dontShowNewVersionMessage": true,
-  "window.customTitleBarVisibility": "auto",
+  "window.customTitleBarVisibility": "never",
   "window.menuBarVisibility": "toggle",
-  "window.zoomLevel": 3,
+  "window.titleBarStyle": "native",
   "workbench.activityBar.location": "top",
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "material-icon-theme",
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }
