@@ -9,3 +9,5 @@
 [core]
 	autocrlf = false
 	eol = lf
+[url "git@github.com:"]
+	insteadOf = https://github.com/
