@@ -6,7 +6,8 @@ TERM = "xterm-256color"
 padding = { x = 15, y = 10 }
 dynamic_padding = true
 decorations = "None"
-opacity = 0.90
+opacity = 0.80
+blur = true
 startup_mode = "Maximized"
 decorations_theme_variant = "Dark"
 

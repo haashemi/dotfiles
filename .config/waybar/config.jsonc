@@ -2,10 +2,6 @@
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["mpris"],
   "modules-right": ["tray", "group/statuses", "group/common", "clock"],
-
-  "margin-top": 5,
-  "margin-left": 5,
-  "margin-right": 5,
   "reload_style_on_change": true,
 
   // === === === === === ===

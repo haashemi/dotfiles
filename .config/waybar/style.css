@@ -14,8 +14,7 @@
 
 window#waybar {
   all: unset;
-  background: @crust;
-  border-radius: 10px;
+  background: black;
 }
 
 tooltip {
