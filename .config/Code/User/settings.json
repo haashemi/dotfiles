@@ -8,13 +8,14 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "go.lintTool": "golangci-lint",
   "astro.content-intellisense": true,
   "astro.updateImportsOnFileMove.enabled": true,
   "cSpell.enabled": true,
-  "cSpell.userWords": ["upfetch"],
+  "cSpell.userWords": ["endmodule", "upfetch"],
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.foldingMaximumRegions": 65000,
-  "editor.fontFamily": "Fira Code, 'Segoe UI Emoji', Vazirmatn",
+  "editor.fontFamily": "'FiraCode Nerd Font', 'Noto Nerd Font', 'Segoe UI Emoji', 'Vazirmatn'",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
@@ -63,9 +64,19 @@
   "telemetry.telemetryLevel": "off",
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.customTitleBarVisibility": "never",
   "window.menuBarVisibility": "toggle",
-  "window.titleBarStyle": "native",
+  // "window.titleBarStyle": "native",
   "workbench.activityBar.location": "top",
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "material-icon-theme",
+  "security.allowedUNCHosts": ["wsl.localhost"],
+  "workbench.colorTheme": "One Dark Pro Mix",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.advanced": {},
+  "nuxtr.defaultPackageManager": "Bun",
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  }
 }
