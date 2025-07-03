@@ -1,7 +1,5 @@
-@import "macchiato.css";
-
 * {
-  color: @text;
+  color: white;
   border: none;
   min-height: 0;
   border-radius: 0;
@@ -54,10 +52,11 @@ tooltip * {
 /* Hyprland workspaces styles     */
 #workspaces * {
   margin: 0;
+  transition: background-color 1s ease-in-out;
 }
 
 #workspaces button:hover {
-  background-color: @overlay2;
+  background-color: #111827;
   border-radius: 5px;
 }
 
@@ -79,10 +78,10 @@ tooltip * {
 /* ****************************** */
 /* Battery styles                 */
 #battery {
-  color: @green;
+  color: #bef264;
 }
 #battery.warning {
-  color: @peach;
+  color: #f38ba8;
   background: none;
   animation-name: blink;
   animation-duration: 1s;
@@ -90,7 +89,7 @@ tooltip * {
   animation-direction: alternate;
 }
 #battery.critical {
-  color: @red;
+  color: #f38ba8;
   animation-name: blink;
   animation-duration: 0.3s;
   animation-timing-function: steps(12);
@@ -99,14 +98,14 @@ tooltip * {
 }
 #battery.charging,
 #battery.plugged {
-  color: @yellow;
+  color: #f9e2af;
   animation-name: none;
 }
 
 /* ****************************** */
 /* Backlight (Brightness) styles  */
 #backlight {
-  color: @sky;
+  color: #94e2d5;
 }
 
 /* ****************************** */
@@ -114,13 +113,13 @@ tooltip * {
 /* Network (Wifi/Ethernet) styles */
 #bluetooth,
 #network {
-  color: @lavender;
+  color: white;
 }
 
 /* ****************************** */
 /* Pulseaudio styles */
 #pulseaudio {
-  color: @rosewater;
+  color: #fca5a5;
 }
 
 /* Animations */

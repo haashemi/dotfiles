@@ -1,6 +1,6 @@
 {
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["mpris"],
+  "modules-center": [],
   "modules-right": ["tray", "group/statuses", "group/common", "clock"],
   "reload_style_on_change": true,
 
