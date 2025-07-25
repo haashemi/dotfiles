@@ -3,27 +3,21 @@
     - amd-ucode
     - base
     - base-devel
+    - bluez
+    - bluez-utils
     - linux
     - linux-firmware
+    - networkmanager
     - nvidia
-    - tlp # Power management
-    - stow # Dotfile manager
-    - yay-bin # AUR helper
-
     - pipewire
     - pipewire-alsa
     - pipewire-jack
     - pipewire-pulse
-  groups:
-    - name: Bluetooth & Network
-      packages:
-        - blueberry
-        - bluez
-        - bluez-utils
-        - networkmanager
 
 - name: Window Manager (Hyprland)
   packages:
+    - sddm
+    - uwsm
     - hyprland
     - hyprpaper
     - hyprpolkitagent
@@ -51,45 +45,46 @@
     - cliphist # Clipboard manager
     - rofi-wayland # Application launcher
     - brightnessctl # Brightness control utility
+    - gnome-keyring # Keyring manager
 
 - name: GUI
   packages:
-    - ghostty
+    - blueberry
     - chromium
     - discord
+    - ghostty
     - mpv
-    - nekoray-bin
     - spotify-launcher
     - telegram-desktop
+    - visual-studio-code-bin
 
-- name: Utilities
+- name: CLI
   packages:
     - aria2
     - bpytop
-    - chntpw
+    - docker
+    - docker-buildx
+    - docker-compose
     - ffmpeg
     - fish
+    - git
+    - go
+    - go-task
     - htop
     - less
     - nano
     - ncdu
     - openssh
     - pwgen
+    - rclone
+    - sing-box-alpha
+    - sqlc
+    - stow # Dotfile manager
+    - tlp # Power management
     - unzip
+    - upx
+    - volta-bin
     - wget
+    - yay-bin # AUR helper
     - yazi
     - zip
-
-- name: Development
-  packages:
-    - docker
-    - docker-buildx
-    - docker-compose
-    - git
-    - go
-    - go-task
-    - sqlc
-    - upx
-    - valkey
-    - visual-studio-code-bin
-    - volta-bin
