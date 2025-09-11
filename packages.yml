@@ -10,14 +10,10 @@
     - networkmanager
     - nvidia
     - pipewire
-    - pipewire-alsa
-    - pipewire-jack
     - pipewire-pulse
 
 - name: Window Manager (Hyprland)
   packages:
-    - sddm
-    - uwsm
     - hyprland
     - hyprpaper
     - hyprpolkitagent
@@ -31,6 +27,7 @@
     - gnome-themes-extra
     - ttf-fira-code
     - ttf-firacode-nerd
+    - vazir-code-fonts
 
     # File Manager
     - thunar
@@ -38,18 +35,18 @@
     - gvfs-smb
     - udisks2
 
+    - rofi # Application launcher
     - dunst # Notification daemon
     - grim # Screenshot utility
     - slurp # Screenshot Selection utility
-    - waybar # Status bar
+    - ashell # Status bar
     - cliphist # Clipboard manager
-    - rofi-wayland # Application launcher
     - brightnessctl # Brightness control utility
     - gnome-keyring # Keyring manager
 
 - name: GUI
   packages:
-    - blueberry
+    - blueman
     - chromium
     - discord
     - ghostty
@@ -72,15 +69,22 @@
     - go-task
     - htop
     - less
+    - lostfiles
     - nano
     - ncdu
     - openssh
+    - pamixer
+    - pavucontrol
+    - postgresql
     - pwgen
     - rclone
+    - reflector
     - sing-box-alpha
     - sqlc
     - stow # Dotfile manager
     - tlp # Power management
+    - tokei
+    - tree
     - unzip
     - upx
     - volta-bin

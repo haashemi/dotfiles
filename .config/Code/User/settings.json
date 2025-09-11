@@ -1,82 +1,63 @@
 {
-  "[astro][svelte][typescript][javascript][typescriptreact][javascriptreact]": {
+  "[css][html][json][jsonc][markdown][mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "[css][html][json][jsonc][mdx]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[nginx]": {
+    "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "go.lintTool": "golangci-lint",
-  "astro.content-intellisense": true,
-  "astro.updateImportsOnFileMove.enabled": true,
   "cSpell.enabled": true,
-  "cSpell.userWords": ["endmodule", "upfetch"],
+  "cSpell.language": "en,fa,fa-IR",
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.foldingMaximumRegions": 65000,
-  "editor.fontFamily": "'FiraCode Nerd Font', 'Noto Nerd Font', 'Segoe UI Emoji', 'Vazirmatn'",
+  "editor.fontFamily": "'FiraCode Nerd Font', 'Vazir Code', 'Noto Nerd Font', 'Segoe UI Emoji'",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "trailing",
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.scrollbar.verticalScrollbarSize": 0,
   "editor.smoothScrolling": true,
-  "editor.stickyScroll.enabled": true,
-  "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.includeStrings": false,
-  "editor.unicodeHighlight.invisibleCharacters": false,
-  "editor.wordWrap": "off",
-  "eslint.codeActionsOnSave.mode": "all",
   "eslint.format.enable": true,
-  "eslint.validate": [
-    "astro", // Enable .astro
-    "javascript",
-    "javascriptreact",
-    "typescript", // Enable .ts
-    "typescriptreact", // Enable .tsx
-    "svelte"
-  ],
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.fileNesting.enabled": true,
   "files.eol": "\n",
-  "files.exclude": {
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/.hg": true,
-    "**/.svn": true,
-    "**/CVS": true,
-    "**/node_modules": true,
-    "**/Thumbs.db": true
-  },
   "git.autofetch": true,
   "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  "git.openRepositoryInParentFolders": "always",
-  "go.toolsManagement.autoUpdate": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "json.maxItemsComputed": 1000000,
-  "prettier.printWidth": 128,
-  "redhat.telemetry.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "telemetry.telemetryLevel": "off",
-  "typescript.inlayHints.parameterNames.enabled": "all",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.menuBarVisibility": "toggle",
-  // "window.titleBarStyle": "native",
-  "workbench.activityBar.location": "top",
-  "workbench.iconTheme": "material-icon-theme",
-  "security.allowedUNCHosts": ["wsl.localhost"],
-  "workbench.colorTheme": "One Dark Pro Mix",
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "github.copilot.advanced": {},
-  "nuxtr.defaultPackageManager": "Bun",
   "github.copilot.enable": {
     "*": false,
-    "plaintext": false,
     "markdown": false,
+    "plaintext": false,
     "scminput": false
-  }
+  },
+  "go.alternateTools": {
+    "customFormatter": "golangci-lint-v2"
+  },
+  "go.formatFlags": ["fmt", "--stdin"],
+  "go.formatTool": "custom",
+  "go.lintFlags": ["--config=${workspaceFolder}/.golangci.yml", "--path-mode=abs", "--fast-only"],
+  "go.lintTool": "golangci-lint-v2",
+  "go.toolsManagement.autoUpdate": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnPaste.enabled": true,
+  "prettier.printWidth": 120,
+  "redhat.telemetry.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "svelte.enable-ts-plugin": true,
+  "telemetry.telemetryLevel": "off",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnPaste.enabled": true,
+  "window.menuBarVisibility": "toggle",
+  "window.titleBarStyle": "native",
+  "workbench.activityBar.location": "top",
+  "workbench.colorTheme": "One Dark Pro Mix",
+  "workbench.iconTheme": "material-icon-theme"
 }
