@@ -1,0 +1,26 @@
+[general]
+import = ["~/.config/alacritty/themes/aura.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding = { x = 15, y = 10 }
+dynamic_padding = true
+decorations = "None"
+opacity = 0.90
+blur = true
+startup_mode = "Maximized"
+decorations_theme_variant = "Dark"
+
+[font]
+size = 11.5
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { blinking = "On" }
+
+[keyboard]
+bindings = [{ key = "F11", action = "ToggleFullscreen" }]
