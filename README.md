@@ -1,3 +1,5 @@
-## ![Preview](./preview.png)
+# 🌌 Project: Aurora
 
-My personal dotfiles, managed with `stow --adopt -t ~/ .`.
+![Preview](/preview.jpg)
+
+My personal work-in-progress dotfiles, managed with `stow -t ~/ .`
