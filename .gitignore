@@ -2,3 +2,7 @@
 !/.config/Code/User
 /.config/Code/User/*
 !/.config/Code/User/settings.json
+
+/.config/fish/functions/x-*
+
+/.local/bin/kde-*
