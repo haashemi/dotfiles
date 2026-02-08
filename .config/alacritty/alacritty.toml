@@ -9,7 +9,7 @@ padding = { x = 15, y = 10 }
 dynamic_padding = true
 opacity = 0.80
 blur = true
-startup_mode = "Maximized"
+startup_mode = "Windowed"
 decorations_theme_variant = "Dark"
 
 [font]
