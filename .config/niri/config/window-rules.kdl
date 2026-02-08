@@ -1,0 +1,12 @@
+// https://yalter.github.io/niri/Configuration%3A-Window-Rules.html
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}

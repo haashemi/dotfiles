@@ -1,0 +1,6 @@
+include "./config/input.kdl"
+include "./config/outputs.kdl"
+include "./config/key-bindings.kdl"
+include "./config/layout.kdl"
+include "./config/miscellaneous.kdl"
+include "./config/window-rules.kdl"

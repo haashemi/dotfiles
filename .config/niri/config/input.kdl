@@ -1,0 +1,21 @@
+// https://yalter.github.io/niri/Configuration%3A-Input.html
+input {
+    keyboard {
+        xkb {
+            layout "us,ir"
+            variant ",winkeys"
+            options "grp:alt_shift_toggle"
+        }
+
+        repeat-delay 500
+        repeat-rate 40
+    }
+
+    touchpad {
+        tap;
+        natural-scroll;
+    }
+
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+}
