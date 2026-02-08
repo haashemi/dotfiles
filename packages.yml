@@ -4,6 +4,7 @@
     - base-devel
     - bluez
     - bluez-utils
+    - iwd # Wifi Manager for networkmanager
     - linux-firmware
     - linux-zen
     - linux-zen-headers
@@ -11,37 +12,67 @@
 
 - name: Zephyrus G15 Specific
   packages:
-    # Microcode
     - amd-ucode
-
-    # GPU Drivers
-    - nvidia-dkms
-    - vulkan-radeon
-    - xf86-video-amdgpu
-    - lib32-vulkan-radeon
-
-    # ASUS Linux
     - asusctl
-    - supergfxctl
-    - rog-control-center
+    - lib32-vulkan-radeon
+    - nvidia-open-dkms
     - power-profiles-daemon
+    - rog-control-center
+    - vulkan-radeon
+
+- name: Fonts
+  packages:
+    - ttf-fira-code
+    - ttf-firacode-nerd
+
+- name: Niri
+  packages:
+    - niri
+    - fuzzel # default application launcher in Niri
+    - mako # notifications
+    - waybar # a Wayland bar
+    - xdg-desktop-portal-gtk
+    - xdg-desktop-portal-gnome # to be able to do screen sharing
+    - swaybg # background image
+    - swayidle, swaylock # to lock the screen on idle status
+    - xwayland-satellite # to run X11 apps
+    - udiskie # to manage and auto-mount USB drives
+
+    - matugen
+
+- name: Gaming
+  packages:
+    - gamemode
+    - gamescope
+    - lutris
+    - mangohud
+    - prismlauncher
+    - steam
+    - wine
+    - wine-gecko
+    - wine-mono
+    - lib32-mangohud
 
 - name: CLI
   packages:
+    - 7zip
     - aria2
+    - bind
     - btop
     - docker
-    - docker-buildx
-    - docker-compose
+    - fastfetch
     - ffmpeg
-    - firewalld
     - fish
     - git
     - go
     - go-task
     - htop
+    - jdk-openjdk
+    - jdk17-openjdk
+    - jdk21-openjdk
     - less
     - lostfiles
+    - mtr
     - nano
     - ncdu
     - net-tools
@@ -49,7 +80,12 @@
     - openssh
     - postgresql
     - pwgen
+    - rage-encryption
     - rclone
+    - reflector
+    - scrcpy
+    - screen
+    - speedtest-go
     - sqlc
     - stow
     - tokei
@@ -57,116 +93,34 @@
     - unzip
     - upx
     - valkey
-    - wget
+    - wireguard-tools
     - yazi
     - zip
 
 - name: GUI
   packages:
-    - discord
     - alacritty
+    - discord
+    - inkscape
     - mpv
     - spotify-launcher
+    - teamspeak3
     - telegram-desktop
-    - obs-studio
-
-- name: Fonts
-  packages:
-    - ttf-fira-code
-    - ttf-firacode-nerd
-    - vazir-code-fonts
-
-- name: KDE Plasma
-  packages:
-    - ark
-    - bluedevil
-    - breeze-gtk
-    - discover
-    - dolphin
-    - dolphin-plugins
-    - ffmpegthumbs
-    - gwenview
-    - kalk
-    - kde-gtk-config
-    - kde-material-you-colors
-    - kdeconnect
-    - kdegraphics-thumbnailers
-    - kdeplasma-addons
-    - kmag
-    - kscreen
-    - kvantum
-    - kwallet-pam
-    - kwayland-integration
-    - kwin-x11
-    - partitionmanager
-    - plasma-browser-integration
-    - plasma-desktop
-    - plasma-disks
-    - plasma-firewall
-    - plasma-nm
-    - plasma-pa
-    - plasma-systemmonitor
-    - plasma-thunderbolt
-    - plasma-x11-session
-    - plasma6-applets-panel-colorizer
-    - print-manager
-    - sddm
-    - sddm-kcm
-    - spectacle
-    - sweeper
-    - yakuake
-
-- name: Xorg
-  packages:
-    - xorg-bdftopcf
-    - xorg-iceauth
-    - xorg-mkfontscale
-    - xorg-sessreg
-    - xorg-smproxy
-    - xorg-x11perf
-    - xorg-xbacklight
-    - xorg-xcmsdb
-    - xorg-xcursorgen
-    - xorg-xdriinfo
-    - xorg-xev
-    - xorg-xgamma
-    - xorg-xhost
-    - xorg-xinit
-    - xorg-xinput
-    - xorg-xkbevd
-    - xorg-xkbprint
-    - xorg-xkbutils
-    - xorg-xkill
-    - xorg-xlsatoms
-    - xorg-xlsclients
-    - xorg-xpr
-    - xorg-xrefresh
-    - xorg-xsetroot
-    - xorg-xvinfo
-    - xorg-xwd
-    - xorg-xwininfo
-    - xorg-xwud
-
-- name: Gaming
-  packages:
-    - steam
-    - gamemode
 
 - name: AUR
   packages:
     # CLI
-    - yay-bin
-    - volta-bin
+    - bushuray-git
     - sing-box-bin
+    - volta-bin
+    - xray-bin
+    - yay-bin
 
     # GUI
-    - google-chrome
+    - android-studio
     - github-desktop-bin
+    - google-chrome
     - visual-studio-code-bin
 
     # Fonts
     - vazir-code-fonts
-
-    # Plasma
-    - kde-material-you-colors # [Colors]
-    - plasma6-applets-panel-colorizer # [Plasma Shell]
