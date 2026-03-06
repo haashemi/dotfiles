@@ -1,6 +1,6 @@
 // https://yalter.github.io/niri/Configuration%3A-Miscellaneous.html
-spawn-at-startup "quickshell"
 spawn-at-startup "swww-daemon"
+spawn-sh-at-startup "quickshell -c Aurora"
 spawn-sh-at-startup "swww img ~/.config/niri/assets/Linkin\\ Park\\ -\\ From\\ Zero.png"
 
 prefer-no-csd
@@ -22,7 +22,8 @@ environment {
     QT_AUTO_SCREEN_SCALE_FACTOR "1"
     QT_QPA_PLATFORM "wayland;xcb"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_STYLE_OVERRIDE "adwaita"
 }
 
 hotkey-overlay {
