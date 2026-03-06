@@ -225,13 +225,13 @@ Scope {
             Behavior on implicitWidth {
                 NumberAnimation {
                     duration: 100
-                    easing.type: Easing.OutQuart
+                    easing.type: Easing.OutQuint
                 }
             }
             Behavior on implicitHeight {
                 NumberAnimation {
                     duration: 100
-                    easing.type: Easing.OutQuart
+                    easing.type: Easing.OutQuint
                 }
             }
         }

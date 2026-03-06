@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 
 Text {
+    anchors.verticalCenter: parent.verticalCenter
+
     required property SystemClock clock
 
     color: "white"

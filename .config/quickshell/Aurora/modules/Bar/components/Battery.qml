@@ -1,6 +1,6 @@
 import QtQuick
-import Quickshell.Services.UPower
 import Quickshell.Widgets
+import "../../../services"
 
 ClippingRectangle {
     id: root
@@ -9,19 +9,18 @@ ClippingRectangle {
     implicitWidth: batteryText.implicitWidth + 20
     implicitHeight: 20
 
-    property int batteryLevel: Math.round(UPower.displayDevice.percentage * 100)
-    property bool isCharging: [UPowerDeviceState.Charging, UPowerDeviceState.FullyCharged].includes(UPower.displayDevice.state)
+    required property SBattery battery
 
     property bool colorsSwitched: false
-    property color colorStep1: isCharging ? "#73FAE9" : batteryLevel <= 20 ? "#ff4d4d" : "#F1F1F1"
-    property color colorStep2: isCharging ? "#4494ea" : batteryLevel <= 20 ? "#ff4d4d" : "#F1F1F1"
+    property color colorStep1: battery.isCharging ? "#73FAE9" : battery.level <= 20 ? "#ff4d4d" : "#F1F1F1"
+    property color colorStep2: battery.isCharging ? "#4494ea" : battery.level <= 20 ? "#ff4d4d" : "#F1F1F1"
 
     Rectangle {
         id: filling
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        implicitWidth: parent.width / 100 * root.batteryLevel
+        implicitWidth: parent.width / 100 * root.battery.level
         gradient: Gradient {
             orientation: Gradient.Horizontal
             GradientStop {
@@ -50,7 +49,7 @@ ClippingRectangle {
     Text {
         id: batteryText
         anchors.centerIn: parent
-        text: `${root.isCharging ? "🗲 " : ""}${root.batteryLevel}`
+        text: `${root.battery.isCharging ? "🗲 " : ""}${root.battery.level}`
         color: "black"
         font.bold: true
     }
@@ -58,14 +57,14 @@ ClippingRectangle {
     Behavior on implicitWidth {
         NumberAnimation {
             duration: 1000
-            easing.type: Easing.OutExpo
+            easing.type: Easing.OutQuint
         }
     }
 
     Timer {
         interval: 1000
-        running: root.isCharging
+        running: root.battery.isCharging
         repeat: true
-        onTriggered: root.colorsSwitched = root.isCharging ? !root.colorsSwitched : false
+        onTriggered: root.colorsSwitched = root.battery.isCharging ? !root.colorsSwitched : false
     }
 }

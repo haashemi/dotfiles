@@ -1,0 +1,15 @@
+{
+  "log": {
+    "loglevel": "error"
+  },
+  "inbounds": [
+    {
+      "port": 8880,
+      "protocol": "vless",
+      "settings": { "clients": [{ "id": "e8c03c53-ab16-48a7-9612-fc13b8316182" }], "decryption": "none" },
+      "streamSettings": { "network": "ws", "wsSettings": { "path": "/ws" } },
+      "sniffing": { "enabled": true, "destOverride": ["http", "tls"] }
+    }
+  ],
+  "outbounds": [{ "protocol": "freedom" }]
+}
