@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/themes/aura.toml"]
+import = ["./themes/aura.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -22,4 +22,7 @@ save_to_clipboard = true
 style = { blinking = "On" }
 
 [keyboard]
-bindings = [{ key = "F11", action = "ToggleFullscreen" }]
+bindings = [
+    { key = "F11", action = "ToggleFullscreen" },
+    { key = "Enter", mods = "Shift", chars = "\n" },
+]
