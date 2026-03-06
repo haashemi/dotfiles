@@ -1,8 +1,6 @@
-/.config/Code/*
-!/.config/Code/User
-/.config/Code/User/*
-!/.config/Code/User/settings.json
+.config/Code/*
+!.config/Code/User
+.config/Code/User/*
+!.config/Code/User/settings.json
 
-/.config/fish/functions/x-*
-
-/.local/bin/kde-*
+.config/fish/functions/x-*

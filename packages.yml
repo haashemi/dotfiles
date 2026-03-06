@@ -9,15 +9,14 @@
     - linux-zen
     - linux-zen-headers
     - networkmanager
+    - pipewire-alsa
+    - pipewire-jack
+    - pipewire-pulse
 
 - name: Zephyrus G15 Specific
   packages:
     - amd-ucode
-    - asusctl
-    - lib32-vulkan-radeon
     - nvidia-open-dkms
-    - power-profiles-daemon
-    - rog-control-center
     - vulkan-radeon
 
 - name: Fonts
@@ -29,16 +28,30 @@
   packages:
     - niri
     - fuzzel # default application launcher in Niri
-    - mako # notifications
-    - waybar # a Wayland bar
-    - xdg-desktop-portal-gtk
-    - xdg-desktop-portal-gnome # to be able to do screen sharing
     - swaybg # background image
-    - swayidle, swaylock # to lock the screen on idle status
-    - xwayland-satellite # to run X11 apps
     - udiskie # to manage and auto-mount USB drives
+    - waybar # a Wayland bar
+    - xwayland-satellite # to run X11 apps
 
+    # Shell - Uncategorized
+    - adwaita-qt5-git
+    - adwaita-qt6-git
+    - brightnessctl
+    - qt6ct
+    - quickshell
+    - swww
+
+    # Gnome
+    - gnome-keyring
+    - gvfs-mtp
+    - gvfs-smb
+    - loupe
     - matugen
+    - seahorse
+    - sushi
+    - wsdd
+    - xdg-desktop-portal-gnome
+    - xdg-desktop-portal-gtk
 
 - name: Gaming
   packages:
@@ -48,10 +61,21 @@
     - mangohud
     - prismlauncher
     - steam
-    - wine
-    - wine-gecko
-    - wine-mono
-    - lib32-mangohud
+  groups:
+    - name: Lutris' Optionals
+      packages:
+        - fluidsynth
+        - innoextract
+        - lib32-gamemode
+        - lib32-vkd3d
+        - python-pefile
+        - python-protobuf
+        - umu-launcher
+        - vkd3d
+        - vulkan-tools
+        - wine
+        - winetricks
+        - xorg-xgamma
 
 - name: CLI
   packages:
@@ -67,6 +91,7 @@
     - go
     - go-task
     - htop
+    - inetutils
     - jdk-openjdk
     - jdk17-openjdk
     - jdk21-openjdk
@@ -94,6 +119,7 @@
     - upx
     - valkey
     - wireguard-tools
+    - wiremix
     - yazi
     - zip
 
@@ -101,8 +127,9 @@
   packages:
     - alacritty
     - discord
-    - inkscape
+    - firefox
     - mpv
+    - obs-studio
     - spotify-launcher
     - teamspeak3
     - telegram-desktop
@@ -110,17 +137,17 @@
 - name: AUR
   packages:
     # CLI
-    - bushuray-git
     - sing-box-bin
     - volta-bin
     - xray-bin
     - yay-bin
+    - xdg-ninja
 
     # GUI
-    - android-studio
     - github-desktop-bin
     - google-chrome
     - visual-studio-code-bin
 
     # Fonts
     - vazir-code-fonts
+    - ttf-material-symbols-variable-git
