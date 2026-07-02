@@ -1,6 +1,6 @@
 // https://yalter.github.io/niri/Configuration%3A-Layout.html
 layout {
-    gaps 10
+    gaps 0
     background-color "#151515"
 
     preset-column-widths {

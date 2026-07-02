@@ -1,5 +1,3 @@
-include "./dms.kdl" // temporary
-
 include "./config/input.kdl"
 include "./config/outputs.kdl"
 include "./config/key-bindings.kdl"

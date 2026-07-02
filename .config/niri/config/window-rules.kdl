@@ -7,6 +7,14 @@ window-rule {
 
 
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 0 // 10
     clip-to-geometry true
+}
+
+window-rule {
+    match app-id="^Alacritty$"
+
+    background-effect {
+        blur true
+    }
 }

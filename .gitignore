@@ -3,4 +3,5 @@
 .config/Code/User/*
 !.config/Code/User/settings.json
 
+.config/fish/fish_variables
 .config/fish/functions/x-*
