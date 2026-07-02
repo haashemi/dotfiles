@@ -1,13 +1,15 @@
+[core]
+	autocrlf = false
+	eol = lf
+[init]
+	defaultBranch = master
+[user]
+	name = Ali Hashemi
+	email = mr.ali.haashemi@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[user]
-	name = Ali Hashemi
-	email = mr.ali.haashemi@gmail.com
-[core]
-	autocrlf = false
-	eol = lf
 [url "git@github.com:"]
 	insteadOf = https://github.com/
