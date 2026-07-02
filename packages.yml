@@ -28,9 +28,8 @@
   packages:
     - niri
     - fuzzel # default application launcher in Niri
-    - swaybg # background image
+    - awww # background image
     - udiskie # to manage and auto-mount USB drives
-    - waybar # a Wayland bar
     - xwayland-satellite # to run X11 apps
 
     # Shell - Uncategorized
@@ -39,7 +38,6 @@
     - brightnessctl
     - qt6ct
     - quickshell
-    - swww
 
     # Gnome
     - gnome-keyring
@@ -53,29 +51,8 @@
     - xdg-desktop-portal-gnome
     - xdg-desktop-portal-gtk
 
-- name: Gaming
-  packages:
-    - gamemode
-    - gamescope
-    - lutris
-    - mangohud
-    - prismlauncher
-    - steam
-  groups:
-    - name: Lutris' Optionals
-      packages:
-        - fluidsynth
-        - innoextract
-        - lib32-gamemode
-        - lib32-vkd3d
-        - python-pefile
-        - python-protobuf
-        - umu-launcher
-        - vkd3d
-        - vulkan-tools
-        - wine
-        - winetricks
-        - xorg-xgamma
+    # Etc
+    - pavucontrol
 
 - name: CLI
   packages:
@@ -83,6 +60,7 @@
     - aria2
     - bind
     - btop
+    - chntpw
     - docker
     - fastfetch
     - ffmpeg
@@ -92,14 +70,18 @@
     - go-task
     - htop
     - inetutils
+    - iperf3
     - jdk-openjdk
     - jdk17-openjdk
     - jdk21-openjdk
+    - jdk25-openjdk
+    - lego
     - less
     - lostfiles
-    - mtr
     - nano
+    - nano-syntax-highlighting
     - ncdu
+    - neovim
     - net-tools
     - nvtop
     - openssh
@@ -108,19 +90,22 @@
     - rage-encryption
     - rclone
     - reflector
+    - rsync
+    - rustup
     - scrcpy
-    - screen
-    - speedtest-go
     - sqlc
     - stow
+    - tmux
     - tokei
     - tree
     - unzip
     - upx
     - valkey
+    - wget
     - wireguard-tools
     - wiremix
     - yazi
+    - yt-dlp
     - zip
 
 - name: GUI
@@ -128,20 +113,24 @@
     - alacritty
     - discord
     - firefox
+    - imhex-bin
+    - moonlight-qt
     - mpv
     - obs-studio
     - spotify-launcher
     - teamspeak3
     - telegram-desktop
+    - tigervnc
 
 - name: AUR
   packages:
     # CLI
     - sing-box-bin
+    - speedtest-go
     - volta-bin
+    - xdg-ninja
     - xray-bin
     - yay-bin
-    - xdg-ninja
 
     # GUI
     - github-desktop-bin
@@ -149,5 +138,10 @@
     - visual-studio-code-bin
 
     # Fonts
-    - vazir-code-fonts
     - ttf-material-symbols-variable-git
+    - vazir-code-fonts
+
+- name: Temp
+  packages:
+    # Delete after Liberify
+    - mediainfo
