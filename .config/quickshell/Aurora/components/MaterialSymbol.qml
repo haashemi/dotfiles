@@ -1,4 +1,5 @@
 import QtQuick
+import qs.config
 
 Text {
     required property string name
@@ -6,7 +7,7 @@ Text {
 
     text: name
     font {
-        family: "MaterialSymbolsRounded"
+        family: Appearance.fontIcons
         pixelSize: size
     }
 }

@@ -1,70 +1,56 @@
 import QtQuick
-import Quickshell.Widgets
-import "../../../services"
+import qs.config
+import qs.components
+import qs.services
 
-ClippingRectangle {
+Row {
     id: root
-    color: "#a1a1a1"
-    radius: height / 2
-    implicitWidth: batteryText.implicitWidth + 20
-    implicitHeight: 20
+    spacing: 3
 
     required property SBattery battery
 
-    property bool colorsSwitched: false
-    property color colorStep1: battery.isCharging ? "#73FAE9" : battery.level <= 20 ? "#ff4d4d" : "#F1F1F1"
-    property color colorStep2: battery.isCharging ? "#4494ea" : battery.level <= 20 ? "#ff4d4d" : "#F1F1F1"
+    readonly property color batteryColor: root.battery.isCharging
+        ? "#73FAE9"
+        : root.battery.level <= 20 ? "#ff4d4d" : Appearance.text
 
-    Rectangle {
-        id: filling
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        implicitWidth: parent.width / 100 * root.battery.level
-        gradient: Gradient {
-            orientation: Gradient.Horizontal
-            GradientStop {
-                position: 0.0
-                color: root.colorsSwitched ? root.colorStep2 : root.colorStep1
+    readonly property string batteryIcon: {
+        const level = root.battery.level;
+        if (level >= 95)
+            return "battery_full";
+        if (level >= 80)
+            return "battery_6_bar";
+        if (level >= 65)
+            return "battery_5_bar";
+        if (level >= 50)
+            return "battery_4_bar";
+        if (level >= 35)
+            return "battery_3_bar";
+        if (level >= 20)
+            return "battery_2_bar";
+        if (level >= 10)
+            return "battery_1_bar";
+        return "battery_0_bar";
+    }
 
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 1000
-                    }
-                }
-            }
-            GradientStop {
-                position: 1.0
-                color: root.colorsSwitched ? root.colorStep1 : root.colorStep2
+    MaterialSymbol {
+        anchors.verticalCenter: parent.verticalCenter
+        size: 16
+        color: root.batteryColor
+        name: root.battery.isCharging ? "battery_charging_full" : root.batteryIcon
 
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 1000
-                    }
-                }
+        Behavior on color {
+            ColorAnimation {
+                duration: 300
             }
         }
     }
 
     Text {
-        id: batteryText
-        anchors.centerIn: parent
-        text: `${root.battery.isCharging ? "🗲 " : ""}${root.battery.level}`
-        color: "black"
+        anchors.verticalCenter: parent.verticalCenter
+        text: `${root.battery.level}%`
+        color: root.batteryColor
+        font.pixelSize: 12
+        font.family: Appearance.fontMono
         font.bold: true
-    }
-
-    Behavior on implicitWidth {
-        NumberAnimation {
-            duration: 1000
-            easing.type: Easing.OutQuint
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: root.battery.isCharging
-        repeat: true
-        onTriggered: root.colorsSwitched = root.battery.isCharging ? !root.colorsSwitched : false
     }
 }

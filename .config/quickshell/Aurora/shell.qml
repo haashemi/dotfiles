@@ -4,21 +4,19 @@
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
 //@ pragma Env QT_SCALE_FACTOR=1
+//@ pragma Env QT_AUTO_SCREEN_SCALE_FACTOR=0
 //@ pragma Env QT_QUICK_CONTROLS_STYLE=Material
-//@ pragma Env QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 import QtQuick
 import Quickshell
-import "modules/Bar"
+import qs.modules.Bar
+import qs.modules.OSD
+import qs.modules.Notifications
 
 ShellRoot {
     id: entrypoint
 
-    readonly property bool disableWatchFiles: Quickshell.env("QS_WATCH_FILES") === "false"
-
-    Component.onCompleted: {
-        Quickshell.watchFiles = !disableWatchFiles;
-    }
-
     Bar {}
+    OSD {}
+    Notifications {}
 }

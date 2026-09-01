@@ -1,20 +1,21 @@
 import QtQuick
 import Quickshell.Widgets
 import Quickshell.Services.Mpris
-import "../../../components"
+import qs.config
+import qs.components
 
 ClippingRectangle {
     id: root
     anchors.verticalCenter: parent.verticalCenter
     color: getColor()
     radius: height / 2
-    implicitWidth: exceededMaxWidth ? maxWidth : contentWidth
+    implicitWidth: root.exceededMaxWidth ? root.maxWidth : root.contentWidth
     implicitHeight: 20
 
     required property MprisPlayer player
-    property int maxWidth: 110
-    property int contentWidth: 10 + musicIcon.width + 5 + musicTitle.width + 15
-    property bool exceededMaxWidth: maxWidth <= contentWidth
+    property int maxWidth: 90
+    readonly property int contentWidth: content.implicitWidth + 25
+    readonly property bool exceededMaxWidth: maxWidth <= contentWidth
 
     MprisModal {
         id: panel
@@ -24,9 +25,9 @@ ClippingRectangle {
 
     Row {
         id: content
-        width: root.implicitWidth
         anchors.left: parent.left
         anchors.leftMargin: 10
+        anchors.rightMargin: 15
         anchors.verticalCenter: parent.verticalCenter
         spacing: 5
 
@@ -65,7 +66,7 @@ ClippingRectangle {
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 300
+            duration: Appearance.animationDuration
             easing.type: Easing.OutQuint
         }
     }

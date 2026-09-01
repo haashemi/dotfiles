@@ -1,12 +1,14 @@
 import QtQuick
+import QtQuick.Controls.Material
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
+import qs.config
 
 ClippingRectangle {
     id: root
     anchors.centerIn: parent
-    color: "white"
+    color: Appearance.text
     radius: height / 2
     implicitWidth: 12 + appName.implicitWidth + 12
     implicitHeight: 20
@@ -22,11 +24,13 @@ ClippingRectangle {
         text: root.name
         font.pixelSize: 14
         font.bold: true
+        font.family: Appearance.fontMono
+        color: Appearance.background
     }
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 500
+            duration: Appearance.animationDuration
             easing.type: Easing.OutQuint
         }
     }

@@ -1,23 +1,16 @@
 import QtQuick
+import QtQuick.Controls.Material
 import Quickshell
-import Quickshell.Widgets
-import "./components"
-import "../../config"
-import "../../services"
-import "../../components"
+import qs.services
+import qs.config
+import qs.modules.Bar.components
 
 Scope {
     SBattery {
         id: battery
     }
-    SBrightness {
-        id: brightness
-    }
     SClock {
         id: clock
-    }
-    SKeyboardBacklight {
-        id: keyboardBacklight
     }
     SPlayers {
         id: players
@@ -25,83 +18,87 @@ Scope {
     SVolume {
         id: volume
     }
+    SBrightness {
+        id: brightness
+    }
+    SNetwork {
+        id: network
+    }
+    SBluetooth {
+        id: bluetooth
+    }
+    SMicrophone {
+        id: microphone
+    }
 
     PanelWindow {
         anchors.top: true
         anchors.left: true
         anchors.right: true
-        implicitHeight: 30
+        implicitHeight: Appearance.barHeight
         color: "transparent"
 
-        Row {
+        Material.theme: Material.Dark
+        Material.background: Appearance.background
+        Material.primary: Appearance.primary
+        Material.accent: Appearance.accent
+
+        Rectangle {
+            id: pill
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
             anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 10
-
-            Clock {
-                clock: clock
-            }
-            Repeater {
-                model: players
-                Mpris {
-                    required property var modelData
-                    player: modelData
-                }
-            }
-        }
-
-        AppTitle {}
-
-        Row {
             anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 10
+            height: Appearance.barHeight
+            width: Math.max(220, leftSide.implicitWidth + rightSide.implicitWidth + 40)
+            color: Appearance.barPillBackground
 
-            ClippingRectangle {
-                implicitWidth: levelRows.width
-                implicitHeight: 25
-                radius: 10
+            Row {
+                id: leftSide
+                anchors.left: parent.left
+                anchors.leftMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
-                color: Appearance.background
+                spacing: 10
 
-                Row {
-                    id: levelRows
-                    anchors.centerIn: parent
-
-                    TrayKeyboardBacklight {
-                        keyboardBacklight: keyboardBacklight
-                        implicitHeight: 25
-                    }
-
-                    Divider {
-                        anchors.verticalCenter: parent.verticalCenter
-                        implicitWidth: 1
-                        implicitHeight: 10
-                    }
-
-                    TrayBrightness {
-                        brightness: brightness
-                        implicitHeight: 25
-                    }
-
-                    Divider {
-                        anchors.verticalCenter: parent.verticalCenter
-                        implicitWidth: 1
-                        implicitHeight: 10
-                    }
-
-                    TrayVolume {
-                        volume: volume
-                        implicitHeight: 25
+                Clock {
+                    clock: clock
+                }
+                Repeater {
+                    model: players
+                    Mpris {
+                        required property var modelData
+                        player: modelData
                     }
                 }
             }
 
-            Battery {
+            AppTitle {}
+
+            Row {
+                id: rightSide
+                anchors.right: parent.right
+                anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
-                battery: battery
+                spacing: 8
+
+                Wifi {
+                    network: network
+                }
+                Bluetooth {
+                    bluetooth: bluetooth
+                }
+                Brightness {
+                    brightness: brightness
+                }
+                Volume {
+                    volume: volume
+                }
+                Mic {
+                    microphone: microphone
+                }
+                Battery {
+                    battery: battery
+                }
             }
         }
     }
