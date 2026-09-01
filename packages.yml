@@ -1,5 +1,6 @@
 - name: Linux
   packages:
+    - amd-ucode
     - base
     - base-devel
     - bluez
@@ -13,16 +14,11 @@
     - pipewire-jack
     - pipewire-pulse
 
-- name: Zephyrus G15 Specific
-  packages:
-    - amd-ucode
-    - nvidia-open-dkms
-    - vulkan-radeon
-
 - name: Fonts
   packages:
     - ttf-fira-code
     - ttf-firacode-nerd
+    - ttf-jetbrains-mono
 
 - name: Niri
   packages:
@@ -51,9 +47,6 @@
     - xdg-desktop-portal-gnome
     - xdg-desktop-portal-gtk
 
-    # Etc
-    - pavucontrol
-
 - name: CLI
   packages:
     - 7zip
@@ -62,7 +55,6 @@
     - btop
     - chntpw
     - docker
-    - fastfetch
     - ffmpeg
     - fish
     - git
@@ -71,11 +63,6 @@
     - htop
     - inetutils
     - iperf3
-    - jdk-openjdk
-    - jdk17-openjdk
-    - jdk21-openjdk
-    - jdk25-openjdk
-    - lego
     - less
     - lostfiles
     - nano
@@ -83,20 +70,17 @@
     - ncdu
     - neovim
     - net-tools
-    - nvtop
     - openssh
     - postgresql
     - pwgen
     - rage-encryption
     - rclone
-    - reflector
     - rsync
     - rustup
     - scrcpy
     - sqlc
     - stow
     - tmux
-    - tokei
     - tree
     - unzip
     - upx
@@ -105,7 +89,6 @@
     - wireguard-tools
     - wiremix
     - yazi
-    - yt-dlp
     - zip
 
 - name: GUI
@@ -113,8 +96,6 @@
     - alacritty
     - discord
     - firefox
-    - imhex-bin
-    - moonlight-qt
     - mpv
     - obs-studio
     - spotify-launcher
@@ -126,10 +107,7 @@
   packages:
     # CLI
     - sing-box-bin
-    - speedtest-go
-    - volta-bin
     - xdg-ninja
-    - xray-bin
     - yay-bin
 
     # GUI
@@ -140,8 +118,3 @@
     # Fonts
     - ttf-material-symbols-variable-git
     - vazir-code-fonts
-
-- name: Temp
-  packages:
-    # Delete after Liberify
-    - mediainfo
