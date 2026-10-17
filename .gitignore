@@ -1,7 +1,3 @@
-.config/Code/*
-!.config/Code/User
-.config/Code/User/*
-!.config/Code/User/settings.json
-
 .config/fish/fish_variables
+.config/fish/conf.d/x-*
 .config/fish/functions/x-*

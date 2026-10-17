@@ -6,9 +6,9 @@
     - bluez
     - bluez-utils
     - iwd # Wifi Manager for networkmanager
+    - linux
     - linux-firmware
-    - linux-zen
-    - linux-zen-headers
+    - linux-headers
     - networkmanager
     - pipewire-alsa
     - pipewire-jack
