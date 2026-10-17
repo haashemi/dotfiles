@@ -15,8 +15,10 @@ Singleton {
     readonly property color surface: "#101418"
     readonly property color surfaceContainer: "#1d2024"
     readonly property color surfaceContainerHigh: "#272a2f"
+    readonly property color surfaceContainerHighest: "#32353a"
     readonly property color textOnSurface: "#e0e2e8"
     readonly property color textOnSurfaceVariant: "#c2c7cf"
+    readonly property color outline: "#8c9199"
 
     // Persian/Arabic + Latin in one family; its Latin is Roboto-derived, so it reads as stock M3.
     readonly property string fontUi: "Vazirmatn"

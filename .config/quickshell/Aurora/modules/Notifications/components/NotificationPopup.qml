@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import qs.config
+import qs.services
 import qs.components
 
 // Android 16 heads-up card. Click runs the default action, swipe or ✕ dismisses,
@@ -18,7 +19,7 @@ Item {
     readonly property int timeout: {
         if (notification.urgency === NotificationUrgency.Critical)
             return 0;
-        return notification.expireTimeout > 0 ? notification.expireTimeout * 1000 : 5000;
+        return notification.expireTimeout > 0 ? notification.expireTimeout * 1000 : 4000;
     }
     property bool closing: false
     readonly property alias card: card
@@ -50,7 +51,7 @@ Item {
 
     Timer {
         interval: Math.max(root.timeout, 1)
-        running: root.timeout > 0 && !hover.hovered && !swipe.active && !root.closing
+        running: root.timeout > 0 && !hover.hovered && !swipe.active && !root.closing && !SPanels.quickSettings
         onTriggered: root.close(false, 0)
     }
 
@@ -93,7 +94,7 @@ Item {
         width: root.width
         implicitHeight: content.implicitHeight + 32
         radius: 28
-        color: Qt.alpha(Appearance.surfaceContainerHigh, 0.85)
+        color: Qt.alpha(Appearance.surfaceContainerHigh, 0.75)
         opacity: 1 - Math.min(1, Math.abs(x) / width)
 
         HoverHandler {

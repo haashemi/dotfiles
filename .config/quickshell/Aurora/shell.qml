@@ -10,6 +10,7 @@ import Quickshell
 import qs.modules.Bar
 import qs.modules.OSD
 import qs.modules.Notifications
+import qs.modules.QuickSettings
 
 ShellRoot {
     id: entrypoint
@@ -17,4 +18,5 @@ ShellRoot {
     Bar {}
     OSD {}
     Notifications {}
+    QuickSettings {}
 }

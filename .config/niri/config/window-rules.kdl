@@ -19,10 +19,13 @@ window-rule {
     }
 }
 
+// Aurora (QuickShell) surfaces request their own rounded blur shapes via
+// ext-background-effect; switch them from xray (blurred wallpaper only) to real
+// blur of whatever is behind them.
 layer-rule {
-    match namespace="^aurora-osd$"
+    match namespace="^aurora-"
 
     background-effect {
-        blur true
+        xray false
     }
 }

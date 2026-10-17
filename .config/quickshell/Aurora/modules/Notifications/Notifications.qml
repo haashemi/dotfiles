@@ -13,7 +13,8 @@ Scope {
         // Cards register themselves so each gets its own rounded blur region.
         property list<Item> cards: []
 
-        visible: (SNotifications.list?.values.length ?? 0) > 0
+        // Like Android's shade: no heads-up while Quick Settings is open; they wait.
+        visible: (SNotifications.list?.values.length ?? 0) > 0 && !SPanels.quickSettings
         anchors.top: true
         anchors.right: true
         margins.top: 8

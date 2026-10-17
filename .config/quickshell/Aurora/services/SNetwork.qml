@@ -31,4 +31,23 @@ Singleton {
 
         return null;
     }
+
+    // Connected first, then saved, then by signal. ScriptModel keeps delegates
+    // (and their expanded/password state) across rescans.
+    readonly property ScriptModel networks: ScriptModel {
+        values: [...(root.wifiDevice?.networks.values ?? [])].filter(network => network.name).sort((a, b) => (b.connected - a.connected) || (b.known - a.known) || (b.signalStrength - a.signalStrength))
+    }
+
+    // Scan only while someone is looking at the list.
+    property bool scanning: false
+    onScanningChanged: if (wifiDevice)
+        wifiDevice.scannerEnabled = scanning
+
+    function setWifiEnabled(value: bool): void {
+        Networking.wifiEnabled = value;
+    }
+
+    function signalIcon(strength: real): string {
+        return ["network_wifi_1_bar", "network_wifi_2_bar", "network_wifi_3_bar", "network_wifi"][Math.min(3, Math.floor(strength * 4))];
+    }
 }

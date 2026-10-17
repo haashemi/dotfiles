@@ -52,7 +52,18 @@ Scope {
         onTriggered: root.shown = false
     }
 
+    // Quick Settings has the same sliders; don't stack the OSD on top of it.
+    Connections {
+        target: SPanels
+        function onQuickSettingsChanged() {
+            if (SPanels.quickSettings)
+                root.shown = false;
+        }
+    }
+
     function show(kind: string): void {
+        if (SPanels.quickSettings)
+            return;
         root.kind = kind;
         root.shown = true;
         if (!hover.hovered)

@@ -16,30 +16,11 @@ Row {
         return Appearance.textOnSurface;
     }
 
-    readonly property string batteryIcon: {
-        const level = SBattery.level;
-        if (level >= 95)
-            return "battery_full";
-        if (level >= 80)
-            return "battery_6_bar";
-        if (level >= 65)
-            return "battery_5_bar";
-        if (level >= 50)
-            return "battery_4_bar";
-        if (level >= 35)
-            return "battery_3_bar";
-        if (level >= 20)
-            return "battery_2_bar";
-        if (level >= 10)
-            return "battery_1_bar";
-        return "battery_0_bar";
-    }
-
     MaterialSymbol {
         anchors.verticalCenter: parent.verticalCenter
         size: 16
         color: root.batteryColor
-        name: SBattery.isCharging ? "battery_charging_full" : root.batteryIcon
+        name: SBattery.icon
 
         Behavior on color {
             ColorAnimation {
