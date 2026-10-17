@@ -18,3 +18,11 @@ window-rule {
         blur true
     }
 }
+
+layer-rule {
+    match namespace="^aurora-osd$"
+
+    background-effect {
+        blur true
+    }
+}

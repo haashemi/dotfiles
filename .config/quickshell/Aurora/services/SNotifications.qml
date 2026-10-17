@@ -1,30 +1,22 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
 
-Scope {
-    id: root
+// Only advertise what NotificationPopup actually renders.
+Singleton {
+    readonly property alias list: server.trackedNotifications
 
     NotificationServer {
-        id: notificationServer
+        id: server
         keepOnReload: true
         actionsSupported: true
-        actionIconsSupported: true
-        bodyHyperlinksSupported: true
-        bodyImagesSupported: true
         bodyMarkupSupported: true
+        bodyHyperlinksSupported: true
         imageSupported: true
-        inlineReplySupported: true
         persistenceSupported: true
 
-        onNotification: not => not.tracked = true
-    }
-
-    readonly property Notification notification: notificationServer.trackedNotifications.values[0]
-    readonly property int notificationCount: notificationServer.trackedNotifications.values.length
-    readonly property bool showNotification: !!notification
-
-    function dismiss(not): void {
-        not.tracked = false;
+        onNotification: notification => notification.tracked = true
     }
 }

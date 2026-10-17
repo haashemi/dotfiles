@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls.Material
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
@@ -8,15 +7,21 @@ import qs.config
 ClippingRectangle {
     id: root
     anchors.centerIn: parent
-    color: Appearance.text
+    color: Appearance.secondaryContainer
     radius: height / 2
-    implicitWidth: 12 + appName.implicitWidth + 12
+    implicitWidth: appName.implicitWidth + 24
     implicitHeight: 20
 
-    property Toplevel topLevel: ToplevelManager.activeToplevel
-    property DesktopEntry app: DesktopEntries.byId(root.topLevel?.appId)
+    readonly property Toplevel topLevel: ToplevelManager.activeToplevel
+    readonly property DesktopEntry app: DesktopEntries.byId(root.topLevel?.appId)
+    readonly property string name: root.app?.name ?? root.topLevel?.title ?? "Aurora"
 
-    property string name: root.app?.name ?? root.topLevel?.title ?? "Aurora"
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: Appearance.animationDuration
+            easing.type: Easing.OutCubic
+        }
+    }
 
     Text {
         id: appName
@@ -24,14 +29,7 @@ ClippingRectangle {
         text: root.name
         font.pixelSize: 14
         font.bold: true
-        font.family: Appearance.fontMono
-        color: Appearance.background
-    }
-
-    Behavior on implicitWidth {
-        NumberAnimation {
-            duration: Appearance.animationDuration
-            easing.type: Easing.OutQuint
-        }
+        font.family: Appearance.fontUi
+        color: Appearance.textOnSecondaryContainer
     }
 }

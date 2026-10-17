@@ -4,13 +4,10 @@ import qs.components
 import qs.services
 
 MaterialSymbol {
-    id: root
-    required property SBluetooth bluetooth
-
     size: 16
-    visible: root.bluetooth.enabled
-    color: root.bluetooth.connectedDevices > 0 ? Appearance.accent : Appearance.text
-    name: "bluetooth"
+    visible: SBluetooth.enabled
+    color: SBluetooth.connectedDevices > 0 ? Appearance.primary : Appearance.textOnSurface
+    name: SBluetooth.connectedDevices > 0 ? "bluetooth_connected" : "bluetooth"
 
     Behavior on color {
         ColorAnimation {

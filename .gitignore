@@ -1,3 +1,4 @@
 .config/fish/fish_variables
 .config/fish/conf.d/x-*
 .config/fish/functions/x-*
+.config/quickshell/*/.qmlls.ini

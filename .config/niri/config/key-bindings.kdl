@@ -5,9 +5,9 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
 
-    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.04+ -l 1.0"; }
-    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.04-"; }
-    XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs ipc -c Aurora call volume increase"; }
+    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs ipc -c Aurora call volume decrease"; }
+    XF86AudioMute         allow-when-locked=true { spawn-sh "qs ipc -c Aurora call volume toggleMute"; }
     XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86AudioPlay         allow-when-locked=true { spawn-sh "playerctl play-pause"; }
     XF86AudioStop         allow-when-locked=true { spawn-sh "playerctl stop"; }
@@ -15,8 +15,6 @@ binds {
     XF86AudioNext         allow-when-locked=true { spawn-sh "playerctl next"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "qs ipc -c Aurora call brightness increase"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs ipc -c Aurora call brightness decrease"; }
-    XF86KbdBrightnessUp   allow-when-locked=true { spawn-sh "qs ipc -c Aurora call keyboard-backlight increase"; }
-    XF86KbdBrightnessDown allow-when-locked=true { spawn-sh "qs ipc -c Aurora call keyboard-backlight decrease"; }
 
     Mod+Q repeat=false { close-window; }
     Mod+O repeat=false { toggle-overview; }

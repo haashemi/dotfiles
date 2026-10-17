@@ -3,22 +3,26 @@ pragma Singleton
 import QtQuick
 import Quickshell
 
-// https://www.realtimecolors.com/?colors=deeaf3-050d14-7fbbea-0c5a95-31a4fd&fonts=Inter-Inter
+// M3 dark scheme from seed #7fbbea — keep in sync with AGENTS.md.
 Singleton {
-    readonly property color text: 'white'
-    readonly property color background: "#050d14"
-    readonly property color primary: "#7fbbea"
-    readonly property color secondary: "#0c5a95"
-    readonly property color accent: "#31a4fd"
+    readonly property color primary: "#9ccbfb"
+    readonly property color textOnPrimary: "#003352"
+    readonly property color primaryContainer: "#0f4a73"
+    readonly property color textOnPrimaryContainer: "#cfe5ff"
+    readonly property color secondaryContainer: "#3a4857"
+    readonly property color textOnSecondaryContainer: "#d6e4f7"
+    readonly property color error: "#ffb4ab"
+    readonly property color surface: "#101418"
+    readonly property color surfaceContainer: "#1d2024"
+    readonly property color surfaceContainerHigh: "#272a2f"
+    readonly property color textOnSurface: "#e0e2e8"
+    readonly property color textOnSurfaceVariant: "#c2c7cf"
 
-    readonly property string fontMono: "JetBrains Mono"
-    readonly property string fontUi: "JetBrains Mono"
-    readonly property string fontIcons: "MaterialSymbolsRounded"
-    readonly property string fontPersian: "Vazirmatn"
+    // Persian/Arabic + Latin in one family; its Latin is Roboto-derived, so it reads as stock M3.
+    readonly property string fontUi: "Vazirmatn"
+    readonly property string fontIcons: "Material Symbols Rounded"
 
     readonly property int barHeight: 30
-    readonly property int barPillRadius: 15
-    readonly property color barPillBackground: "#e6050d14"
 
     readonly property int animationDuration: 300
 }

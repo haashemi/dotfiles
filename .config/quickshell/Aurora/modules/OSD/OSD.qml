@@ -1,214 +1,154 @@
 import QtQuick
-import QtQuick.Controls.Material
+import QtQuick.Layouts
 import Quickshell
-import Quickshell.Widgets
+import Quickshell.Wayland
 import qs.services
 import qs.config
 import qs.modules.OSD.components
 
+// Android 16/17 expressive volume dialog: blurred pill docked to the right edge.
+// Pops on S*.adjusted (real changes from any source), never on startup.
 Scope {
     id: root
 
-    SBrightness {
-        id: brightness
-    }
-    SKeyboardBacklight {
-        id: keyboardBacklight
-    }
-    SVolume {
-        id: volume
-    }
+    property string kind: "volume" // volume | brightness | keyboard
+    property bool shown: false
+    property real progress: shown ? 1 : 0
 
-    readonly property bool isVisible: activeDevice !== 0
-    property int activeDevice: 0
-    property string activeIcon: "volume_up"
-    property real activeLevel: 0
+    readonly property int margin: 12
 
-    readonly property int margin: 15
-
-    Connections {
-        target: volume
-        function onLevelChanged() {
-            root.activeDevice = 1;
-            root.activeIcon = root.volumeIcon(volume.level);
-            root.activeLevel = volume.level / 100;
-            root.restart();
+    Behavior on progress {
+        NumberAnimation {
+            duration: root.shown ? 350 : 200
+            easing.type: root.shown ? Easing.OutCubic : Easing.InCubic
         }
     }
 
     Connections {
-        target: brightness
-        function onLevelChanged() {
-            root.activeDevice = 2;
-            root.activeIcon = root.brightnessIcon(brightness.level);
-            root.activeLevel = brightness.level / 100;
-            root.restart();
+        target: SVolume
+        function onAdjusted() {
+            root.show("volume");
         }
     }
 
     Connections {
-        target: keyboardBacklight
-        function onLevelChanged() {
-            root.activeDevice = 3;
-            root.activeIcon = root.keyboardBacklightIcon(keyboardBacklight.level);
-            root.activeLevel = keyboardBacklight.level / 100;
-            root.restart();
+        target: SBrightness
+        function onAdjusted() {
+            root.show("brightness");
         }
     }
 
+    Connections {
+        target: SKeyboardBacklight
+        function onAdjusted() {
+            root.show("keyboard");
+        }
+    }
+
+    // Android's volume dialog timeout.
     Timer {
-        id: autohideTimer
-        interval: 1000
-        onTriggered: root.activeDevice = 0
+        id: hideTimer
+        interval: 3000
+        onTriggered: root.shown = false
     }
 
-    Timer {
-        id: showTimer
-        interval: 0
-        running: root.isVisible
-        onTriggered: loader.active = true
+    function show(kind: string): void {
+        root.kind = kind;
+        root.shown = true;
+        if (!hover.hovered)
+            hideTimer.restart();
     }
 
-    Timer {
-        id: destroyTimer
-        interval: 500
-        running: !root.isVisible
-        onTriggered: loader.active = false
-    }
+    PanelWindow {
+        visible: root.progress > 0
+        anchors.right: true
+        implicitWidth: dialog.width + root.margin
+        implicitHeight: dialog.height
+        color: "transparent"
+        exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "aurora-osd"
+        mask: Region {
+            item: dialog
+        }
+        BackgroundEffect.blurRegion: Region {
+            item: dialog
+            radius: dialog.radius
+        }
 
-    function restart(): void {
-        autohideTimer.restart();
-    }
+        Rectangle {
+            id: dialog
+            x: (1 - root.progress) * (width + root.margin)
+            opacity: root.progress
+            width: 60
+            height: column.implicitHeight + 20
+            // Pill when there are buttons; otherwise concentric with the slider.
+            radius: root.kind === "volume" ? width / 2 : slider.outerRadius + column.anchors.margins
+            color: Qt.alpha(Appearance.surfaceContainer, 0.6)
 
-    function volumeIcon(level: int): string {
-        if (level === 0)
-            return "no_sound";
-        if (level <= 35)
-            return "volume_mute";
-        if (level <= 65)
-            return "volume_down";
-        return "volume_up";
-    }
-
-    function brightnessIcon(level: int): string {
-        if (level === 0)
-            return "brightness_1";
-        if (level <= 20)
-            return "brightness_2";
-        if (level <= 40)
-            return "brightness_3";
-        if (level <= 60)
-            return "brightness_4";
-        if (level <= 80)
-            return "brightness_5";
-        if (level <= 99)
-            return "brightness_6";
-        return "brightness_7";
-    }
-
-    function keyboardBacklightIcon(level: int): string {
-        if (level === 0)
-            return "backlight_high_off";
-        if (level === 100)
-            return "backlight_high";
-        return "backlight_low";
-    }
-
-    LazyLoader {
-        id: loader
-
-        PanelWindow {
-            id: panel
-            color: "transparent"
-            exclusiveZone: 0
-            mask: Region {}
-            anchors {
-                right: true
-                top: true
-                bottom: true
-            }
-            margins {
-                right: root.margin
-                top: root.margin
-                bottom: root.margin
-            }
-            implicitWidth: pill.implicitWidth
-            implicitHeight: pill.implicitHeight
-
-            Material.theme: Material.Dark
-            Material.background: Appearance.background
-            Material.primary: Appearance.primary
-            Material.accent: Appearance.accent
-
-            property bool viewPanel: false
-
-            Timer {
-                interval: 0
-                running: loader.active
-                onTriggered: panel.viewPanel = true
-            }
-
-            Connections {
-                target: root
-                function onIsVisibleChanged() {
-                    panel.viewPanel = root.isVisible
-                }
-            }
-
-            Rectangle {
-                id: pill
-                x: 0
-                y: (parent.height - height) / 2
-                implicitWidth: content.implicitWidth
-                implicitHeight: content.implicitHeight
-                radius: Math.min(width, height) / 2
-                color: "#c0000000"
-                opacity: 0.8
-
-                Component.onCompleted: pill.x = panel.implicitWidth + root.margin + 20
-
+            Behavior on radius {
                 NumberAnimation {
-                    running: panel.viewPanel
-                    target: pill
-                    property: "x"
-                    from: panel.implicitWidth + root.margin + 20
-                    to: 0
-                    duration: Appearance.animationDuration
-                    easing.type: Easing.OutQuint
-                }
-                NumberAnimation {
-                    running: !panel.viewPanel
-                    target: pill
-                    property: "x"
-                    from: 0
-                    to: panel.implicitWidth + root.margin + 20
                     duration: 200
-                    easing.type: Easing.OutQuint
+                    easing.type: Easing.OutCubic
                 }
-                NumberAnimation {
-                    running: panel.viewPanel
-                    target: pill
-                    property: "opacity"
-                    from: 0.8
-                    to: 1.0
-                    duration: Appearance.animationDuration
-                    easing.type: Easing.OutQuint
-                }
-                NumberAnimation {
-                    running: !panel.viewPanel
-                    target: pill
-                    property: "opacity"
-                    from: 1.0
-                    to: 0.8
-                    duration: 200
-                    easing.type: Easing.OutQuint
+            }
+
+            HoverHandler {
+                id: hover
+                onHoveredChanged: hovered ? hideTimer.stop() : hideTimer.restart()
+            }
+
+            ColumnLayout {
+                id: column
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 10
+
+                OSDButton {
+                    visible: root.kind === "volume"
+                    radius: width / 2
+                    color: Appearance.primary
+                    icon: SVolume.muted ? "volume_off" : "volume_up"
+                    onClicked: SVolume.setMuted(!SVolume.muted)
                 }
 
-                OSDItem {
-                    id: content
-                    anchors.centerIn: parent
-                    icon: root.activeIcon
-                    level: root.activeLevel
+                OSDSlider {
+                    id: slider
+                    steps: root.kind === "keyboard" ? SKeyboardBacklight.maxBrightness : 0
+                    value: {
+                        if (root.kind === "brightness")
+                            return SBrightness.level / 100;
+                        if (root.kind === "keyboard")
+                            return SKeyboardBacklight.level / 100;
+                        return SVolume.muted ? 0 : SVolume.volume;
+                    }
+                    icon: {
+                        if (root.kind === "brightness")
+                            return SBrightness.icon;
+                        if (root.kind === "keyboard")
+                            return SKeyboardBacklight.icon;
+                        return SVolume.muted ? "music_off" : "music_note";
+                    }
+                    onMoved: value => {
+                        if (root.kind === "brightness")
+                            SBrightness.setLevel(value);
+                        else if (root.kind === "keyboard")
+                            SKeyboardBacklight.setLevel(value);
+                        else {
+                            if (SVolume.muted)
+                                SVolume.setMuted(false);
+                            SVolume.setVolume(value);
+                        }
+                    }
+                }
+
+                // Stands in for Android's live-caption toggle.
+                OSDButton {
+                    visible: root.kind === "volume"
+                    color: SVolume.micMuted ? Appearance.primary : Appearance.textOnPrimary
+                    iconColor: SVolume.micMuted ? Appearance.textOnPrimary : Appearance.textOnPrimaryContainer
+                    icon: SVolume.micMuted ? "mic_off" : "mic"
+                    onClicked: SVolume.toggleMic()
                 }
             }
         }

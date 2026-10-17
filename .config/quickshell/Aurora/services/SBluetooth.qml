@@ -1,8 +1,10 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Bluetooth
 
-Scope {
+Singleton {
     readonly property bool enabled: Bluetooth.defaultAdapter?.enabled ?? false
-    readonly property int connectedDevices: Bluetooth.devices.values.length
+    readonly property int connectedDevices: Bluetooth.devices.values.filter(device => device.connected).length
 }

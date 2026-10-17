@@ -4,10 +4,8 @@ import qs.components
 import qs.services
 
 MaterialSymbol {
-    required property SMicrophone microphone
-
     size: 16
-    visible: microphone.muted
-    color: "#ff4d4d"
+    visible: SVolume.micMuted
+    color: Appearance.error
     name: "mic_off"
 }

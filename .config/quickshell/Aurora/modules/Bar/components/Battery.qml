@@ -5,16 +5,19 @@ import qs.services
 
 Row {
     id: root
+    visible: SBattery.present
     spacing: 3
 
-    required property SBattery battery
-
-    readonly property color batteryColor: root.battery.isCharging
-        ? "#73FAE9"
-        : root.battery.level <= 20 ? "#ff4d4d" : Appearance.text
+    readonly property color batteryColor: {
+        if (SBattery.isCharging)
+            return Appearance.primary;
+        if (SBattery.level <= 20)
+            return Appearance.error;
+        return Appearance.textOnSurface;
+    }
 
     readonly property string batteryIcon: {
-        const level = root.battery.level;
+        const level = SBattery.level;
         if (level >= 95)
             return "battery_full";
         if (level >= 80)
@@ -36,21 +39,22 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         size: 16
         color: root.batteryColor
-        name: root.battery.isCharging ? "battery_charging_full" : root.batteryIcon
+        name: SBattery.isCharging ? "battery_charging_full" : root.batteryIcon
 
         Behavior on color {
             ColorAnimation {
-                duration: 300
+                duration: Appearance.animationDuration
             }
         }
     }
 
     Text {
         anchors.verticalCenter: parent.verticalCenter
-        text: `${root.battery.level}%`
+        text: `${SBattery.level}%`
         color: root.batteryColor
         font.pixelSize: 12
-        font.family: Appearance.fontMono
+        font.family: Appearance.fontUi
+        font.features: { "tnum": 1 }
         font.bold: true
     }
 }

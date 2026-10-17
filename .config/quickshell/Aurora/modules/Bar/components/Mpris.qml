@@ -4,77 +4,77 @@ import Quickshell.Services.Mpris
 import qs.config
 import qs.components
 
+// Bar pill for one player; click toggles its media card.
 ClippingRectangle {
     id: root
     anchors.verticalCenter: parent.verticalCenter
-    color: getColor()
-    radius: height / 2
-    implicitWidth: root.exceededMaxWidth ? root.maxWidth : root.contentWidth
-    implicitHeight: 20
 
     required property MprisPlayer player
-    property int maxWidth: 90
-    readonly property int contentWidth: content.implicitWidth + 25
-    readonly property bool exceededMaxWidth: maxWidth <= contentWidth
+    readonly property int maxWidth: 90
+    readonly property int contentWidth: content.implicitWidth + 20
 
-    MprisModal {
-        id: panel
-        player: root.player
-        showPanel: false
-    }
-
-    Row {
-        id: content
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.rightMargin: 15
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 5
-
-        MaterialSymbol {
-            id: musicIcon
-            anchors.verticalCenter: parent.verticalCenter
-            name: "music_note"
-            size: 15
-        }
-
-        Text {
-            id: musicTitle
-            anchors.verticalCenter: parent.verticalCenter
-            text: root.player.trackTitle
-            color: "black"
-            font.pixelSize: 14
-        }
-    }
-
-    Rectangle {
-        width: 20
-        height: parent.height
-        anchors.right: parent.right
-        gradient: Gradient {
-            orientation: Gradient.Horizontal
-            GradientStop {
-                position: 0
-                color: 'transparent'
-            }
-            GradientStop {
-                position: 0.7
-                color: root.exceededMaxWidth ? root.getColor() : 'transparent'
-            }
-        }
-    }
+    color: Appearance.primaryContainer
+    radius: height / 2
+    implicitWidth: Math.min(maxWidth, contentWidth)
+    implicitHeight: 20
 
     Behavior on implicitWidth {
         NumberAnimation {
             duration: Appearance.animationDuration
-            easing.type: Easing.OutQuint
+            easing.type: Easing.OutCubic
         }
     }
 
-    function getColor(): string {
-        if (player.identity === "Spotify")
-            return "#1DB954";
+    MprisModal {
+        id: card
+        player: root.player
+    }
 
-        return "white";
+    Row {
+        id: content
+        x: 8
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 4
+
+        MaterialSymbol {
+            anchors.verticalCenter: parent.verticalCenter
+            name: root.player.isPlaying ? "music_note" : "pause"
+            size: 14
+            fill: true
+            color: Appearance.textOnPrimaryContainer
+        }
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            text: root.player.trackTitle
+            color: Appearance.textOnPrimaryContainer
+            font.family: Appearance.fontUi
+            font.pixelSize: 13
+        }
+    }
+
+    // Fade an overflowing title into the pill.
+    Rectangle {
+        visible: root.contentWidth > root.maxWidth
+        anchors.right: parent.right
+        width: 20
+        height: parent.height
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop {
+                position: 0
+                color: "transparent"
+            }
+            GradientStop {
+                position: 0.7
+                color: Appearance.primaryContainer
+            }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: card.open = !card.open
     }
 }

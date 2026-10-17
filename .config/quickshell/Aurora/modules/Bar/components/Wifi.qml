@@ -4,25 +4,22 @@ import qs.components
 import qs.services
 
 MaterialSymbol {
-    id: root
-    required property SNetwork network
-
     size: 16
-    color: Appearance.text
-    opacity: root.network.wifiEnabled ? 1 : 0.4
+    color: Appearance.textOnSurface
+    opacity: SNetwork.wifiEnabled ? 1 : 0.38
 
     name: {
-        if (!root.network.wifiEnabled)
+        if (!SNetwork.wifiEnabled)
             return "wifi_off";
-        if (root.network.wifiConnected)
-            return ["wifi_1_bar", "wifi_2_bar", "wifi"][Math.round(root.network.wifiStrength * 2)];
+        if (SNetwork.wifiConnected)
+            return ["wifi_1_bar", "wifi_2_bar", "wifi"][Math.round(SNetwork.wifiStrength * 2)];
         return "wifi";
     }
 
     Behavior on opacity {
         NumberAnimation {
             duration: Appearance.animationDuration
-            easing.type: Easing.OutQuint
+            easing.type: Easing.OutCubic
         }
     }
 }

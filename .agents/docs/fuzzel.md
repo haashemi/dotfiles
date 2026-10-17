@@ -22,7 +22,7 @@ Reference: `man 5 fuzzel.ini`, defaults in `/etc/xdg/fuzzel/fuzzel.ini`. Validat
 - Shape: `radius=28` (M3 extra-large), `selection-radius=20` = half of `line-height=40px` → pill.
 - Prompt is the Material Symbols `search` glyph (U+E8B6). It's a private-use codepoint, so editors/tools may drop it.
   Re-insert with: `sed -i "s/^prompt=.*/prompt=\"$(printf '\xee\xa2\xb6')  \"/" .config/fuzzel/fuzzel.ini`
-- The font fallback list includes `Material Symbols Rounded` so the glyph renders.
+- Font `Vazirmatn` (shared UI font, covers Persian app names); `Material Symbols Rounded` is in the fallback list so the prompt glyph renders.
 - `image-size-ratio=0`: no large icon when there are few matches; it kept the list shape stable.
 - No border: M3 surfaces separate by tone, not outline.
 

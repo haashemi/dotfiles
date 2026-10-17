@@ -1,8 +1,10 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Networking
 
-Scope {
+Singleton {
     id: root
 
     readonly property bool wifiEnabled: Networking.wifiEnabled
