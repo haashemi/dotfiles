@@ -66,7 +66,7 @@ Scope {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: SPanels.quickSettings = !SPanels.quickSettings
+                onClicked: SPanels.toggleQuickSettings("main")
             }
 
             Row {

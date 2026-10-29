@@ -14,6 +14,8 @@ Compositor. Entry `.config/niri/config.kdl` includes `.config/niri/config/*.kdl`
 - Hybrid GPU: no GPU-selection variables. With `vulkan-radeon` installed, the Vulkan loader lists the iGPU as GPU0
   (`vulkaninfo --summary`) even without `vulkan-mesa-layers`, so the dGPU stays asleep unless an app asks for it. Without `vulkan-radeon`, every Vulkan app (GTK4, mpv) wakes the 3050 Ti.
 
+- `Mod+V` opens the Aurora clipboard history. It used to be `toggle-window-floating`; the owner dropped that bind (`Mod+Shift+V` still switches focus between floating and tiling).
+
 ## Open questions
 
 - No idle daemon: screens only turn off with `Mod+Shift+P`.

@@ -5,6 +5,7 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+A hotkey-overlay-title="Quick Settings" { spawn-sh "qs ipc -c Aurora call quicksettings toggle"; }
+    Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs ipc -c Aurora call clipboard toggle"; }
 
     XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs ipc -c Aurora call volume increase"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs ipc -c Aurora call volume decrease"; }
@@ -191,7 +192,6 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+Shift+S { screenshot; }
 

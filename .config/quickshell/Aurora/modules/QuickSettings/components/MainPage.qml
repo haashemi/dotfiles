@@ -183,6 +183,13 @@ ColumnLayout {
                 Quickshell.execDetached(["sh", "-c", "sleep 0.3; niri msg action screenshot"]);
             }
         }
+
+        Tile {
+            Layout.fillWidth: true
+            icon: "content_paste"
+            hasDetails: true
+            onOpened: root.open("clipboard")
+        }
     }
 
     MediaCard {

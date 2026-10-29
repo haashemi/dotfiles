@@ -38,7 +38,8 @@ niri msg action screenshot-screen --show-pointer false --path $S/shot.png
 | SKeyboardBacklight | UPower `KbdBacklight` over `gdbus` | The ASUS firmware handles the Fn keys itself; UPower's `BrightnessChangedWithSource` is the only signal for that. 0–3 levels. IPC `keyboard-backlight`. Changes made with `asusctl`/`brightnessctl` are **not** seen. |
 | SNotifications | `NotificationServer` | Advertises only what the popup renders (actions, markup, links, image). `dnd` drops non-critical notifications (there's no history); it survives reloads, not restarts. |
 | SAsus | asusd `xyz.ljones.Platform` over busctl/gdbus | `PlatformProfile` (Quiet=2, Balanced=0, Performance=1), `ChargeControlEndThreshold`, `OneShotFullCharge`. |
-| SPanels | — | UI open state (`quickSettings`) shared by the bar button, the panel and IPC `quicksettings toggle/open/close`. |
+| SPanels | — | UI open state (`quickSettings`, `quickSettingsPage`) shared by the bar button, the panels and IPC `quicksettings toggle/open/close`, `clipboard toggle`. `toggleQuickSettings(page)` closes only when that page is already showing. |
+| SClipboard | `wl-paste --watch scripts/clipboard.sh store` | Entries are files in `~/.local/share/aurora/clipboard/{history,pinned}`, named `<epoch-ns>-<sha1>.<txt\|png…>`. History keeps 14, pins are unlimited, both survive reboots. Re-copying moves an entry to the top (pinned ones stay put). `CLIPBOARD_STATE=sensitive` copies (password managers) are skipped. Script commands run through one queue, and every command but `copy` prints the new list. |
 | SPlayers | Mpris | Exposes a `ScriptModel`, so delegates survive track changes. |
 | SNetwork / SBluetooth | Networking / Bluetooth | Sorted `ScriptModel`s for the lists. `scanning` is bound by the Quick Settings detail pages, so scanning and discovery run only while a list is visible. |
 | SBattery | UPower + sysfs | Health = `energyCapacity` / sysfs `energy_full_design`; UPower's display device reports no health. |
@@ -67,17 +68,18 @@ No history or notification center, by owner's decision; expired notifications ar
 
 ## Quick Settings — Android 17 shade
 
-Opened by `Mod+S` or the bar's status pill (it highlights while open). Esc, a click outside, or the pill again closes it; Esc on a detail page goes back.
+Opened by `Mod+A` or the bar's status pill (it highlights while open). Esc, a click outside, or the pill again closes it; Esc on a detail page goes back.
 It's a full-screen transparent Overlay layer with exclusive keyboard focus. The panel is 400 wide, top-right under the bar, radius 28, with an **opaque** `surfaceContainer` background and no blur (because of the niri bug below). Open/close reveals it by height with M3 emphasized motion: 450ms `[0.05, 0.7, 0.1, 1]` in, 250ms `[0.3, 0, 0.8, 0.15]` out. Page switches animate `fullHeight` (350ms emphasized) and cross-fade over 200ms.
 While it's open, the OSD is suppressed and notification popups are hidden with their timers paused (Android: no heads-up over the shade).
 
 - **Main**: header (44px clock, date, battery chip → Battery, power button → Power), brightness / volume / keyboard `HSlider`s, then a 4-column tile grid.
   - Wide tiles: Wi-Fi, Bluetooth, Power mode, Do Not Disturb. The icon container toggles; the body opens details (DND only toggles).
-  - Small tiles: mic, airplane (Wi-Fi + Bluetooth off), screenshot (closes the panel, then `niri msg action screenshot`).
+  - Small tiles: mic, airplane (Wi-Fi + Bluetooth off), screenshot (closes the panel, then `niri msg action screenshot`), clipboard (opens Clipboard).
   - Then a `MediaCard` carousel of all players.
 - **Wi-Fi**: master switch and the network list. A tap joins saved or open networks; secured new networks expand to a password field (Enter or Connect). A wrong password shows inline. Expand a saved network for Forget / Disconnect.
 - **Bluetooth**: master switch, paired devices (tap to connect/disconnect; the chevron reveals Forget) and available devices (tap to trust + pair, then auto-connect).
 - **Battery**: level, status, time left, power draw, energy, health, power-mode button group, charge-limit slider (50–100%, 5% steps), "Charge to 100% once".
+- **Clipboard** (also `Mod+V`, which opens the panel straight on this page): pinned entries, then the 14 newest copies, text and images. Rows are a fixed 64px: text shows 2 lines, images a cropped thumbnail. Click or Enter copies the entry back and closes the panel (no auto-paste, by owner's decision). Up/Down move the selection (hover moves it too), Delete removes. Each row has pin and remove buttons, and the header's sweep button clears the history but keeps pins. Keys reach the page through `Keys.forwardTo` on the panel.
 - **Power**: Log out / Suspend / Restart / Power off. No Lock tile, because no screen locker is installed.
 
 Tile spec: 64 tall. Off = pill; on = rounded square (r20) for every tile. Wide tiles have a 48 icon container (circle when off, primary r16 when on); small tiles fill primary when on. Hover state layer at 8%.
@@ -95,6 +97,8 @@ Shared by Quick Settings (all players, with paging) and the bar pill popup (one 
 Position is polled at 1Hz while it's active and playing.
 
 ## Backlog
+
+- Clipboard: no section labels between pinned and recent (rows have a fixed height); pinned rows are only marked by a filled pin. Niri screenshots land in the history too, since niri copies them to the clipboard. Clipboard key and mouse handling verified only through IPC and rendering.
 
 - Swipe-to-dismiss, media-card controls and Quick Settings interactions (password entry, pairing) are verified only by rendering and IPC, not real pointer/keyboard input.
 - The DND state resets on shell restart (PersistentProperties only survives reloads).

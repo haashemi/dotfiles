@@ -6,12 +6,13 @@ import qs.services
 import qs.modules.QuickSettings.components
 
 // Android 17-style Quick Settings, top-right under the bar. Opened by the bar's
-// status button or Mod+S (IPC "quicksettings"); Esc, a click outside or the
-// same button closes it. A full-screen transparent layer catches outside clicks.
+// status button or Mod+A (IPC "quicksettings"), or on the clipboard page by
+// Mod+V (IPC "clipboard"); Esc, a click outside or the same button closes it.
+// A full-screen transparent layer catches outside clicks.
 Scope {
     id: root
 
-    property string page: "main"
+    readonly property string page: SPanels.quickSettingsPage
     property real progress: SPanels.quickSettings ? 1 : 0
 
     // M3 emphasized motion: long gentle deceleration in, quick acceleration out.
@@ -26,10 +27,8 @@ Scope {
     Connections {
         target: SPanels
         function onQuickSettingsChanged() {
-            if (SPanels.quickSettings) {
-                root.page = "main";
+            if (SPanels.quickSettings)
                 panel.forceActiveFocus();
-            }
         }
     }
 
@@ -70,7 +69,8 @@ Scope {
                     wifi: wifi,
                     bluetooth: bluetooth,
                     battery: battery,
-                    power: power
+                    power: power,
+                    clipboard: clipboard
                 })[root.page]
 
             // Animated separately so page switches resize smoothly without
@@ -99,11 +99,12 @@ Scope {
                 }
             }
 
+            Keys.forwardTo: root.page === "clipboard" ? [clipboard] : []
             Keys.onEscapePressed: {
                 if (root.page === "main")
                     SPanels.quickSettings = false;
                 else
-                    root.page = "main";
+                    SPanels.quickSettingsPage = "main";
             }
 
             // Swallow clicks so they don't reach the close-on-outside-click layer.
@@ -121,7 +122,7 @@ Scope {
                     opacity: root.page === "main" ? 1 : 0
                     visible: opacity > 0
                     active: SPanels.quickSettings && root.page === "main"
-                    onOpen: page => root.page = page
+                    onOpen: page => SPanels.quickSettingsPage = page
                     onClose: SPanels.quickSettings = false
 
                     Behavior on opacity {
@@ -136,7 +137,7 @@ Scope {
                     width: parent.width
                     opacity: root.page === "wifi" ? 1 : 0
                     visible: opacity > 0
-                    onBack: root.page = "main"
+                    onBack: SPanels.quickSettingsPage = "main"
 
                     Behavior on opacity {
                         NumberAnimation {
@@ -150,7 +151,7 @@ Scope {
                     width: parent.width
                     opacity: root.page === "bluetooth" ? 1 : 0
                     visible: opacity > 0
-                    onBack: root.page = "main"
+                    onBack: SPanels.quickSettingsPage = "main"
 
                     Behavior on opacity {
                         NumberAnimation {
@@ -164,7 +165,7 @@ Scope {
                     width: parent.width
                     opacity: root.page === "battery" ? 1 : 0
                     visible: opacity > 0
-                    onBack: root.page = "main"
+                    onBack: SPanels.quickSettingsPage = "main"
 
                     Behavior on opacity {
                         NumberAnimation {
@@ -178,7 +179,23 @@ Scope {
                     width: parent.width
                     opacity: root.page === "power" ? 1 : 0
                     visible: opacity > 0
-                    onBack: root.page = "main"
+                    onBack: SPanels.quickSettingsPage = "main"
+                    onClose: SPanels.quickSettings = false
+
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
+                }
+
+                ClipboardPage {
+                    id: clipboard
+                    width: parent.width
+                    opacity: root.page === "clipboard" ? 1 : 0
+                    visible: opacity > 0
+                    shown: SPanels.quickSettings && root.page === "clipboard"
+                    onBack: SPanels.quickSettingsPage = "main"
                     onClose: SPanels.quickSettings = false
 
                     Behavior on opacity {
