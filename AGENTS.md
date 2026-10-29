@@ -39,4 +39,5 @@ Fonts: UI `Vazirmatn` everywhere (Persian/Arabic + Roboto-derived Latin; use `tn
 ## App docs
 
 - [fuzzel](.agents/docs/fuzzel.md)
+- [mpv](.agents/docs/mpv.md): hardware decoding
 - [quickshell (Aurora)](.agents/docs/quickshell.md): services, OSD/notification/media specs, testing gotchas
