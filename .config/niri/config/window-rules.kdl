@@ -11,6 +11,15 @@ window-rule {
     clip-to-geometry true
 }
 
+layer-rule {
+    match namespace="^launcher$"
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
 window-rule {
     match app-id="^Alacritty$"
 
@@ -19,11 +28,7 @@ window-rule {
     }
 }
 
-// Aurora (QuickShell) surfaces request their own rounded blur shapes via
-// ext-background-effect; switch them from xray (blurred wallpaper only) to real
-// blur of whatever is behind them.
 layer-rule {
-    match namespace="^aurora-"
 
     background-effect {
         xray false

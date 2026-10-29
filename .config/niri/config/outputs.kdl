@@ -2,4 +2,5 @@
 output "eDP-1" {
     scale 1.25
     backdrop-color "#151515"
+    variable-refresh-rate
 }

@@ -40,4 +40,5 @@ Fonts: UI `Vazirmatn` everywhere (Persian/Arabic + Roboto-derived Latin; use `tn
 
 - [fuzzel](.agents/docs/fuzzel.md)
 - [mpv](.agents/docs/mpv.md): hardware decoding
+- [niri](.agents/docs/niri.md): 165 Hz with VRR
 - [quickshell (Aurora)](.agents/docs/quickshell.md): services, OSD/notification/media specs, testing gotchas
