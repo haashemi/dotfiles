@@ -2,7 +2,7 @@
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "qs ipc -c Aurora call launcher toggle"; }
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+A hotkey-overlay-title="Quick Settings" { spawn-sh "qs ipc -c Aurora call quicksettings toggle"; }
     Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs ipc -c Aurora call clipboard toggle"; }

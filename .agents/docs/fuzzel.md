@@ -1,6 +1,8 @@
 # fuzzel
 
-App launcher; `Mod+D` in niri (`.config/niri/config/key-bindings.kdl`). Config: `.config/fuzzel/fuzzel.ini` (fuzzel ≥ 1.15).
+**Status: replaced** by the Aurora launcher on `Mod+D` (see [launcher.md](launcher.md)). The config is kept as a fallback by owner's decision; its usage cache `~/.cache/fuzzel` seeded the launcher's counts once.
+
+App launcher; was `Mod+D` in niri (`.config/niri/config/key-bindings.kdl`). Config: `.config/fuzzel/fuzzel.ini` (fuzzel ≥ 1.15).
 Reference: `man 5 fuzzel.ini`, defaults in `/etc/xdg/fuzzel/fuzzel.ini`. Validate with `fuzzel --check-config`.
 
 ## Token mapping (see AGENTS.md)

@@ -38,7 +38,8 @@ Fonts: UI `Vazirmatn` everywhere (Persian/Arabic + Roboto-derived Latin; use `tn
 
 ## App docs
 
-- [fuzzel](.agents/docs/fuzzel.md)
+- [fuzzel](.agents/docs/fuzzel.md): replaced by the Aurora launcher, config kept
+- [launcher (Aurora)](.agents/docs/launcher.md): Mod+D app launcher, ranking, usage counts
 - [mpv](.agents/docs/mpv.md): hardware decoding
 - [niri](.agents/docs/niri.md): 165 Hz with VRR
 - [quickshell (Aurora)](.agents/docs/quickshell.md): services, OSD/notification/media specs, testing gotchas

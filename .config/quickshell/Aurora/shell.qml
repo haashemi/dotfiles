@@ -11,6 +11,7 @@ import qs.modules.Bar
 import qs.modules.OSD
 import qs.modules.Notifications
 import qs.modules.QuickSettings
+import qs.modules.Launcher
 
 ShellRoot {
     id: entrypoint
@@ -19,4 +20,5 @@ ShellRoot {
     OSD {}
     Notifications {}
     QuickSettings {}
+    Launcher {}
 }

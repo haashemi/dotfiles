@@ -6,7 +6,7 @@ Managed by GNU stow. Run with `quickshell -c Aurora`; Niri spawns it at startup.
 
 ```
 Aurora/
-├── shell.qml              # entrypoint: ShellRoot + pragmas; instantiates Bar, OSD, Notifications
+├── shell.qml              # entrypoint: ShellRoot + pragmas; instantiates Bar, OSD, Notifications, QuickSettings, Launcher
 ├── config/                # design tokens (Appearance singleton: colors, fonts, sizes)
 ├── components/            # shared primitives (MaterialSymbol, HSlider, M3Switch, MediaCard)
 ├── services/              # S* singletons over Quickshell/system services (SVolume, SBrightness, ...)
@@ -15,7 +15,8 @@ Aurora/
     ├── Bar/               # full-width top bar: Clock + Mpris pills with media card (L), AppTitle (C), Wifi/Bluetooth/Brightness/Volume/Mic/Battery (R)
     ├── OSD/               # Android 16-style volume/brightness dialog (right edge, blurred), driven by S*.adjusted
     ├── Notifications/     # Android-style heads-up cards, top-right (server lives in services/SNotifications.qml)
-    └── QuickSettings/     # Android 17 shade: sliders, tiles, Wi-Fi/Bluetooth/Battery/Power/Clipboard pages, media (Mod+A, Mod+V)
+    ├── QuickSettings/     # Android 17 shade: sliders, tiles, Wi-Fi/Bluetooth/Battery/Power/Clipboard pages, media (Mod+A, Mod+V)
+    └── Launcher/          # centered app launcher, most launched first (Mod+D); apps/usage in services/SLauncher.qml
 ```
 
 Each module owns its `PanelWindow`s; module-local widgets live in `modules/<mod>/components/`.

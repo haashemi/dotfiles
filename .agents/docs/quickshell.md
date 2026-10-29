@@ -38,7 +38,8 @@ niri msg action screenshot-screen --show-pointer false --path $S/shot.png
 | SKeyboardBacklight | UPower `KbdBacklight` over `gdbus` | The ASUS firmware handles the Fn keys itself; UPower's `BrightnessChangedWithSource` is the only signal for that. 0–3 levels. IPC `keyboard-backlight`. Changes made with `asusctl`/`brightnessctl` are **not** seen. |
 | SNotifications | `NotificationServer` | Advertises only what the popup renders (actions, markup, links, image). `dnd` drops non-critical notifications (there's no history); it survives reloads, not restarts. niri's "Screenshot captured" notification is always dropped (the screenshot is in the clipboard history). |
 | SAsus | asusd `xyz.ljones.Platform` over busctl/gdbus | `PlatformProfile` (Quiet=2, Balanced=0, Performance=1), `ChargeControlEndThreshold`, `OneShotFullCharge`. |
-| SPanels | — | UI open state (`quickSettings`, `quickSettingsPage`) shared by the bar button, the panels and IPC `quicksettings toggle/open/close`, `clipboard toggle`. `toggleQuickSettings(page)` closes only when that page is already showing. |
+| SPanels | — | UI open state (`quickSettings`, `quickSettingsPage`, `launcher`) shared by the bar button, the panels and IPC `quicksettings toggle/open/close`, `clipboard toggle`, `launcher toggle/open/close`. `toggleQuickSettings(page)` closes only when that page is already showing. Launcher and Quick Settings close each other. |
+| SLauncher | `DesktopEntries` | App list, search ranking and launch counts (`~/.local/share/aurora/launcher/usage.json`, seeded once from fuzzel's cache). `Terminal=true` apps run in `alacritty -e`. See `.agents/docs/launcher.md`. |
 | SClipboard | `wl-paste --watch scripts/clipboard.sh store` | Entries are files in `~/.local/share/aurora/clipboard/{history,pinned}`, named `<epoch-ns>-<sha1>.<txt\|png…>`. History keeps 14, pins are unlimited, both survive reboots. Re-copying moves an entry to the top (pinned ones stay put). `CLIPBOARD_STATE=sensitive` copies (password managers) are skipped. Script commands run through one queue, and every command but `copy` prints the new list. |
 | SPlayers | Mpris | Exposes a `ScriptModel`, so delegates survive track changes. |
 | SNetwork / SBluetooth | Networking / Bluetooth | Sorted `ScriptModel`s for the lists. `scanning` is bound by the Quick Settings detail pages, so scanning and discovery run only while a list is visible. |
@@ -84,6 +85,10 @@ While it's open, the OSD is suppressed and notification popups are hidden with t
 
 Tile spec: 64 tall. Off = pill; on = rounded square (r20) for every tile. Wide tiles have a 48 icon container (circle when off, primary r16 when on); small tiles fill primary when on. Hover state layer at 8%.
 
+## Launcher
+
+`Mod+D`: centered search + 8-row list, most launched first, blurred, 200ms center zoom (blur follows the real geometry; the surface never fades because blur can't); window behind a `LazyLoader`. Full spec and decisions: [launcher.md](launcher.md).
+
 ## Media card (`components/MediaCard.qml`)
 
 Shared by Quick Settings (all players, with paging) and the bar pill popup (one player). Matches the Android 16 player:
@@ -97,6 +102,8 @@ Shared by Quick Settings (all players, with paging) and the bar pill popup (one 
 Position is polled at 1Hz while it's active and playing.
 
 ## Backlog
+
+- Launcher: typing/clicks verified only via IPC and rendering.
 
 - Clipboard: no section labels between pinned and recent (rows have a fixed height); pinned rows are only marked by a filled pin. Niri screenshots land in the history too, since niri copies them to the clipboard (its notification is muted). Clipboard key and mouse handling verified only through IPC and rendering.
 
