@@ -8,7 +8,7 @@ Managed by GNU stow. Run with `quickshell -c Aurora`; Niri spawns it at startup.
 Aurora/
 ├── shell.qml              # entrypoint: ShellRoot + pragmas; instantiates Bar, OSD, Notifications, QuickSettings, Launcher
 ├── config/                # design tokens (Appearance singleton: colors, fonts, sizes)
-├── components/            # shared primitives (MaterialSymbol, HSlider, M3Switch, MediaCard)
+├── components/            # shared primitives (MaterialSymbol, IconButton, HSlider, M3Switch, MediaCard)
 ├── services/              # S* singletons over Quickshell/system services (SVolume, SBrightness, ...)
 ├── scripts/               # shell helpers behind services (clipboard.sh: clipboard history store)
 └── modules/               # top-level UI, one folder per feature

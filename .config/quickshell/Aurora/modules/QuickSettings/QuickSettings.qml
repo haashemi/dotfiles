@@ -99,7 +99,7 @@ Scope {
                 }
             }
 
-            Keys.forwardTo: root.page === "clipboard" ? [clipboard] : []
+            Keys.forwardTo: root.page === "clipboard" && clipboard.item ? [clipboard.item] : []
             Keys.onEscapePressed: {
                 if (root.page === "main")
                     SPanels.quickSettings = false;
@@ -132,78 +132,65 @@ Scope {
                     }
                 }
 
-                WifiPage {
+                DetailPage {
                     id: wifi
-                    width: parent.width
-                    opacity: root.page === "wifi" ? 1 : 0
-                    visible: opacity > 0
-                    onBack: SPanels.quickSettingsPage = "main"
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
-                        }
+                    name: "wifi"
+                    sourceComponent: WifiPage {
+                        onBack: SPanels.quickSettingsPage = "main"
                     }
                 }
 
-                BluetoothPage {
+                DetailPage {
                     id: bluetooth
-                    width: parent.width
-                    opacity: root.page === "bluetooth" ? 1 : 0
-                    visible: opacity > 0
-                    onBack: SPanels.quickSettingsPage = "main"
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
-                        }
+                    name: "bluetooth"
+                    sourceComponent: BluetoothPage {
+                        onBack: SPanels.quickSettingsPage = "main"
                     }
                 }
 
-                BatteryPage {
+                DetailPage {
                     id: battery
-                    width: parent.width
-                    opacity: root.page === "battery" ? 1 : 0
-                    visible: opacity > 0
-                    onBack: SPanels.quickSettingsPage = "main"
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
-                        }
+                    name: "battery"
+                    sourceComponent: BatteryPage {
+                        onBack: SPanels.quickSettingsPage = "main"
                     }
                 }
 
-                PowerPage {
+                DetailPage {
                     id: power
-                    width: parent.width
-                    opacity: root.page === "power" ? 1 : 0
-                    visible: opacity > 0
-                    onBack: SPanels.quickSettingsPage = "main"
-                    onClose: SPanels.quickSettings = false
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
-                        }
+                    name: "power"
+                    sourceComponent: PowerPage {
+                        onBack: SPanels.quickSettingsPage = "main"
+                        onClose: SPanels.quickSettings = false
                     }
                 }
 
-                ClipboardPage {
+                DetailPage {
                     id: clipboard
-                    width: parent.width
-                    opacity: root.page === "clipboard" ? 1 : 0
-                    visible: opacity > 0
-                    shown: SPanels.quickSettings && root.page === "clipboard"
-                    onBack: SPanels.quickSettingsPage = "main"
-                    onClose: SPanels.quickSettings = false
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
-                        }
+                    name: "clipboard"
+                    sourceComponent: ClipboardPage {
+                        onBack: SPanels.quickSettingsPage = "main"
+                        onClose: SPanels.quickSettings = false
                     }
                 }
+            }
+        }
+    }
+
+    // A detail page exists only while it's showing (or fading out) and the panel
+    // is open, so its lists, images and scans cost nothing the rest of the time.
+    component DetailPage: Loader {
+        required property string name
+        readonly property bool current: root.page === name
+
+        width: parent.width
+        opacity: current ? 1 : 0
+        visible: opacity > 0
+        active: (current || visible) && (SPanels.quickSettings || root.progress > 0)
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
             }
         }
     }

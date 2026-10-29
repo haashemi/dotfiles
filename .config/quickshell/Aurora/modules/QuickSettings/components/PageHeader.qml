@@ -19,28 +19,10 @@ RowLayout {
     Layout.fillWidth: true
     spacing: 8
 
-    Rectangle {
-        implicitWidth: 40
-        implicitHeight: 40
-        radius: 20
-        color: hover.hovered ? Qt.alpha(Appearance.textOnSurface, 0.08) : "transparent"
-
-        HoverHandler {
-            id: hover
-        }
-
-        MaterialSymbol {
-            anchors.centerIn: parent
-            name: "arrow_back"
-            size: 24
-            color: Appearance.textOnSurface
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onClicked: root.back()
-        }
+    IconButton {
+        icon: "arrow_back"
+        iconColor: Appearance.textOnSurface
+        onClicked: root.back()
     }
 
     Text {
@@ -51,29 +33,10 @@ RowLayout {
         font.pixelSize: 22
     }
 
-    Rectangle {
+    IconButton {
         visible: root.action !== ""
-        implicitWidth: 40
-        implicitHeight: 40
-        radius: 20
-        color: actionHover.hovered ? Qt.alpha(Appearance.textOnSurface, 0.08) : "transparent"
-
-        HoverHandler {
-            id: actionHover
-        }
-
-        MaterialSymbol {
-            anchors.centerIn: parent
-            name: root.action
-            size: 24
-            color: Appearance.textOnSurfaceVariant
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onClicked: root.actionClicked()
-        }
+        icon: root.action
+        onClicked: root.actionClicked()
     }
 
     M3Switch {

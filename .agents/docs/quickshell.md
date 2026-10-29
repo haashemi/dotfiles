@@ -27,7 +27,19 @@ niri msg action screenshot-screen --show-pointer false --path $S/shot.png
 - Inside a `ClippingRectangle`, children are reparented, so `parent.x` is wrong there. Give the rectangle an `id`.
 - QML treats `onX` properties as handlers, and a `Behavior` can't target a `readonly` property.
 - **Don't animate with `transform: Translate`** on anything used as a `Region` item (mask or blur). Regions track item geometry, not transforms, so animate `x`/`y` instead.
+- Icon-only buttons use `components/IconButton.qml` (40dp circle, hover state layer); the media card keeps its own smaller `TransportButton`.
 - All text uses `Appearance.fontUi` (Vazirmatn). Numbers that change in place (clock, battery) set `font.features: { "tnum": 1 }`. Leave `horizontalAlignment` unset so RTL text auto-aligns.
+
+## Performance and memory
+
+Measured on a fresh start (anonymous memory, `RssAnon`): ~125 MB with all modules, of which ~45 MB is the bare QML engine and most of the rest is the first GPU window (Qt scene graph + Mesa). Idle CPU is ~0. Per-module costs are small, so the wins come from not building hidden UI:
+
+- Quick Settings detail pages (Wi-Fi, Bluetooth, Battery, Power, Clipboard) are `Loader`s (`DetailPage` in `QuickSettings.qml`) that exist only while shown, fading out, and the panel is open. First open of the main page went from ~+55 MB to ~+25 MB. Page state (an expanded network, the clipboard selection) resets when the panel closes.
+- The launcher window and the bar's per-player media card window sit behind `LazyLoader`s.
+- Images get a fixed `sourceSize` so layout changes don't re-decode them.
+- Memory freed by unloading isn't returned to the OS (malloc keeps it), so RSS after closing stays near its peak; the gain is a lower peak.
+- Tried and rejected: `QT_QUICK_BACKEND=software` (−45 MB, but Quick Settings didn't render and animations cost more CPU); `QSG_RENDER_LOOP=basic` (only −9 MB); panel-sized instead of full-screen click-catcher windows (no measurable difference).
+- Delegates bound to a model can see `modelData` go null while their page unloads; guard bindings with `?.` (see `WifiPage.qml`).
 
 ## Services
 

@@ -48,15 +48,16 @@ ColumnLayout {
             id: item
 
             required property WifiNetwork modelData
+            // Null for a moment while the page unloads, hence the ?. below.
             readonly property WifiNetwork network: modelData
-            readonly property bool secured: network.security !== WifiSecurityType.Open
+            readonly property bool secured: network?.security !== WifiSecurityType.Open
             property bool expanded: false
             property string error: ""
 
             width: ListView.view.width
             implicitHeight: content.implicitHeight
             radius: 16
-            color: network.connected ? Appearance.primaryContainer : Appearance.surfaceContainerHighest
+            color: network?.connected ? Appearance.primaryContainer : Appearance.surfaceContainerHighest
 
             Connections {
                 target: item.network
@@ -65,7 +66,7 @@ ColumnLayout {
                     item.expanded = true;
                 }
                 function onConnectedChanged() {
-                    if (item.network.connected) {
+                    if (item.network?.connected) {
                         item.error = "";
                         item.expanded = false;
                     }
@@ -87,7 +88,7 @@ ColumnLayout {
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             // One tap joins open/saved networks; everything else expands.
-                            if (!item.network.connected && (item.network.known || !item.secured) && !item.network.stateChanging)
+                            if (!item.network?.connected && (item.network?.known || !item.secured) && !item.network?.stateChanging)
                                 item.network.connect();
                             else
                                 item.expanded = !item.expanded;
@@ -101,10 +102,10 @@ ColumnLayout {
                         spacing: 16
 
                         MaterialSymbol {
-                            name: SNetwork.signalIcon(item.network.signalStrength)
+                            name: SNetwork.signalIcon(item.network?.signalStrength ?? 0)
                             size: 24
                             fill: true
-                            color: item.network.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurface
+                            color: item.network?.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurface
                         }
 
                         ColumnLayout {
@@ -113,9 +114,9 @@ ColumnLayout {
 
                             Text {
                                 Layout.fillWidth: true
-                                text: item.network.name
+                                text: item.network?.name ?? ""
                                 elide: Text.ElideRight
-                                color: item.network.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurface
+                                color: item.network?.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurface
                                 font.family: Appearance.fontUi
                                 font.pixelSize: 14
                                 font.weight: Font.Medium
@@ -125,15 +126,15 @@ ColumnLayout {
                                 Layout.fillWidth: true
                                 visible: text !== ""
                                 text: {
-                                    if (item.network.stateChanging)
+                                    if (item.network?.stateChanging)
                                         return "Connecting…";
-                                    if (item.network.connected)
+                                    if (item.network?.connected)
                                         return "Connected";
-                                    if (item.network.known)
+                                    if (item.network?.known)
                                         return "Saved";
                                     return "";
                                 }
-                                color: item.network.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
+                                color: item.network?.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
                                 font.family: Appearance.fontUi
                                 font.pixelSize: 12
                             }
@@ -144,7 +145,7 @@ ColumnLayout {
                             name: "lock"
                             size: 16
                             fill: true
-                            color: item.network.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
+                            color: item.network?.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
                         }
                     }
                 }
@@ -155,7 +156,7 @@ ColumnLayout {
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
                     Layout.bottomMargin: 12
-                    visible: item.expanded && !item.network.known && !item.network.connected
+                    visible: item.expanded && !item.network?.known && !item.network?.connected
                     spacing: 8
 
                     Rectangle {
@@ -235,7 +236,7 @@ ColumnLayout {
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 12
                     Layout.bottomMargin: 12
-                    visible: item.expanded && (item.network.known || item.network.connected)
+                    visible: item.expanded && (item.network?.known || item.network?.connected)
                     spacing: 8
 
                     PillButton {
@@ -244,9 +245,9 @@ ColumnLayout {
                     }
 
                     PillButton {
-                        text: item.network.connected ? "Disconnect" : "Connect"
+                        text: item.network?.connected ? "Disconnect" : "Connect"
                         filled: true
-                        onClicked: item.network.connected ? item.network.disconnect() : item.network.connect()
+                        onClicked: item.network?.connected ? item.network.disconnect() : item.network.connect()
                     }
                 }
             }

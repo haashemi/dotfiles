@@ -146,7 +146,7 @@ ClippingRectangle {
             Layout.fillWidth: true
             spacing: 8
 
-            IconButton {
+            TransportButton {
                 visible: root.paged
                 icon: "chevron_left"
                 enabled: root.index > 0
@@ -210,7 +210,7 @@ ClippingRectangle {
                 }
             }
 
-            IconButton {
+            TransportButton {
                 visible: root.paged
                 icon: "chevron_right"
                 enabled: root.index < root.players.length - 1
@@ -227,7 +227,7 @@ ClippingRectangle {
             Layout.fillWidth: true
             spacing: 4
 
-            IconButton {
+            TransportButton {
                 icon: "skip_previous"
                 enabled: root.player?.canGoPrevious ?? false
                 onClicked: root.player.previous()
@@ -239,20 +239,20 @@ ClippingRectangle {
                 Layout.rightMargin: 4
             }
 
-            IconButton {
+            TransportButton {
                 icon: "skip_next"
                 enabled: root.player?.canGoNext ?? false
                 onClicked: root.player.next()
             }
 
-            IconButton {
+            TransportButton {
                 visible: root.player?.shuffleSupported ?? false
                 icon: "shuffle"
                 dimmed: !root.player?.shuffle
                 onClicked: root.player.shuffle = !root.player.shuffle
             }
 
-            IconButton {
+            TransportButton {
                 visible: root.player?.loopSupported ?? false
                 icon: root.player?.loopState === MprisLoopState.Track ? "repeat_one" : "repeat"
                 dimmed: root.player?.loopState === MprisLoopState.None
@@ -364,7 +364,7 @@ ClippingRectangle {
         }
     }
 
-    component IconButton: Item {
+    component TransportButton: Item {
         id: button
 
         required property string icon

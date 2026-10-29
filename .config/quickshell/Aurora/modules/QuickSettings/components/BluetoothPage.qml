@@ -176,29 +176,11 @@ ColumnLayout {
                     }
 
                     // Overflow: reveals Forget.
-                    Rectangle {
+                    IconButton {
                         visible: item.known
-                        implicitWidth: 40
-                        implicitHeight: 40
-                        radius: 20
-                        color: more.hovered ? Qt.alpha(Appearance.textOnSurface, 0.08) : "transparent"
-
-                        HoverHandler {
-                            id: more
-                        }
-
-                        MaterialSymbol {
-                            anchors.centerIn: parent
-                            name: item.expanded ? "expand_less" : "expand_more"
-                            size: 24
-                            color: item.device.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: item.expanded = !item.expanded
-                        }
+                        icon: item.expanded ? "expand_less" : "expand_more"
+                        iconColor: item.device.connected ? Appearance.textOnPrimaryContainer : Appearance.textOnSurfaceVariant
+                        onClicked: item.expanded = !item.expanded
                     }
                 }
             }

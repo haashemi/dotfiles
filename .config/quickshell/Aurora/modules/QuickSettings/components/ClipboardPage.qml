@@ -11,11 +11,11 @@ import qs.components
 
 // Clipboard history: pinned entries, then the 14 newest copies. Click or Enter
 // copies an entry back and closes the panel; Up/Down move, Delete removes.
-// Keys arrive via Keys.forwardTo from the panel, which keeps focus.
+// Keys arrive via Keys.forwardTo from the panel, which keeps focus. The page is
+// only loaded while shown, so the selection starts at the top every time.
 ColumnLayout {
     id: root
 
-    property bool shown: false
     readonly property int rowHeight: 64
 
     signal back
@@ -27,13 +27,6 @@ ColumnLayout {
     }
 
     spacing: 12
-
-    onShownChanged: {
-        if (shown) {
-            list.currentIndex = 0;
-            list.positionViewAtBeginning();
-        }
-    }
 
     Keys.onUpPressed: list.decrementCurrentIndex()
     Keys.onDownPressed: list.incrementCurrentIndex()
@@ -132,7 +125,8 @@ ColumnLayout {
                 Image {
                     anchors.fill: parent
                     source: item.modelData.image ? `file://${item.modelData.path}` : ""
-                    sourceSize.width: thumb.width * 2
+                    // Fixed, so layout changes never trigger a re-decode.
+                    sourceSize.width: 600
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
                 }
@@ -146,47 +140,17 @@ ColumnLayout {
 
                 IconButton {
                     icon: "push_pin"
+                    iconSize: 20
                     filled: item.modelData.pinned
                     onClicked: SClipboard.togglePin(item.modelData)
                 }
 
                 IconButton {
                     icon: "close"
+                    iconSize: 20
                     onClicked: SClipboard.remove(item.modelData)
                 }
             }
-        }
-    }
-
-    component IconButton: Rectangle {
-        id: button
-
-        required property string icon
-        property bool filled: false
-
-        signal clicked
-
-        width: 40
-        height: 40
-        radius: 20
-        color: hover.hovered ? Qt.alpha(Appearance.textOnSurface, 0.08) : "transparent"
-
-        HoverHandler {
-            id: hover
-        }
-
-        MaterialSymbol {
-            anchors.centerIn: parent
-            name: button.icon
-            size: 20
-            fill: button.filled
-            color: button.filled ? Appearance.primary : Appearance.textOnSurfaceVariant
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onClicked: button.clicked()
         }
     }
 }

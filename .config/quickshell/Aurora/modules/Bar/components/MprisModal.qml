@@ -30,31 +30,35 @@ Scope {
         onTriggered: root.open = false
     }
 
-    PanelWindow {
-        visible: root.progress > 0
-        anchors.top: true
-        anchors.left: true
-        margins.top: 8
-        margins.left: 8
-        exclusiveZone: 0
-        implicitWidth: card.width
-        implicitHeight: card.height
-        color: "transparent"
-        WlrLayershell.namespace: "aurora-media"
-        mask: Region {
-            item: card
-        }
+    // The card only exists while it's showing; one per player otherwise adds up.
+    LazyLoader {
+        active: root.progress > 0
 
-        MediaCard {
-            id: card
-            width: 400
-            y: (1 - root.progress) * -16
-            opacity: root.progress
-            players: [root.player]
-            active: root.open
+        PanelWindow {
+            anchors.top: true
+            anchors.left: true
+            margins.top: 8
+            margins.left: 8
+            exclusiveZone: 0
+            implicitWidth: card.width
+            implicitHeight: card.height
+            color: "transparent"
+            WlrLayershell.namespace: "aurora-media"
+            mask: Region {
+                item: card
+            }
 
-            HoverHandler {
-                onHoveredChanged: hovered ? closeTimer.stop() : closeTimer.restart()
+            MediaCard {
+                id: card
+                width: 400
+                y: (1 - root.progress) * -16
+                opacity: root.progress
+                players: [root.player]
+                active: root.open
+
+                HoverHandler {
+                    onHoveredChanged: hovered ? closeTimer.stop() : closeTimer.restart()
+                }
             }
         }
     }
