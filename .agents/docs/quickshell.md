@@ -36,7 +36,7 @@ niri msg action screenshot-screen --show-pointer false --path $S/shot.png
 | SVolume | Pipewire default sink/source | `adjusted` fires on any volume/mute/mic change, after a 500ms settle following a device (re)bind. IPC `volume increase/decrease/toggleMute` (4% steps). |
 | SBrightness | `brightnessctl` + sysfs | Re-reads sysfs before each step, so outside changes aren't overwritten. IPC `brightness`. |
 | SKeyboardBacklight | UPower `KbdBacklight` over `gdbus` | The ASUS firmware handles the Fn keys itself; UPower's `BrightnessChangedWithSource` is the only signal for that. 0–3 levels. IPC `keyboard-backlight`. Changes made with `asusctl`/`brightnessctl` are **not** seen. |
-| SNotifications | `NotificationServer` | Advertises only what the popup renders (actions, markup, links, image). `dnd` drops non-critical notifications (there's no history); it survives reloads, not restarts. |
+| SNotifications | `NotificationServer` | Advertises only what the popup renders (actions, markup, links, image). `dnd` drops non-critical notifications (there's no history); it survives reloads, not restarts. niri's "Screenshot captured" notification is always dropped (the screenshot is in the clipboard history). |
 | SAsus | asusd `xyz.ljones.Platform` over busctl/gdbus | `PlatformProfile` (Quiet=2, Balanced=0, Performance=1), `ChargeControlEndThreshold`, `OneShotFullCharge`. |
 | SPanels | — | UI open state (`quickSettings`, `quickSettingsPage`) shared by the bar button, the panels and IPC `quicksettings toggle/open/close`, `clipboard toggle`. `toggleQuickSettings(page)` closes only when that page is already showing. |
 | SClipboard | `wl-paste --watch scripts/clipboard.sh store` | Entries are files in `~/.local/share/aurora/clipboard/{history,pinned}`, named `<epoch-ns>-<sha1>.<txt\|png…>`. History keeps 14, pins are unlimited, both survive reboots. Re-copying moves an entry to the top (pinned ones stay put). `CLIPBOARD_STATE=sensitive` copies (password managers) are skipped. Script commands run through one queue, and every command but `copy` prints the new list. |
@@ -98,7 +98,7 @@ Position is polled at 1Hz while it's active and playing.
 
 ## Backlog
 
-- Clipboard: no section labels between pinned and recent (rows have a fixed height); pinned rows are only marked by a filled pin. Niri screenshots land in the history too, since niri copies them to the clipboard. Clipboard key and mouse handling verified only through IPC and rendering.
+- Clipboard: no section labels between pinned and recent (rows have a fixed height); pinned rows are only marked by a filled pin. Niri screenshots land in the history too, since niri copies them to the clipboard (its notification is muted). Clipboard key and mouse handling verified only through IPC and rendering.
 
 - Swipe-to-dismiss, media-card controls and Quick Settings interactions (password entry, pairing) are verified only by rendering and IPC, not real pointer/keyboard input.
 - The DND state resets on shell restart (PersistentProperties only survives reloads).

@@ -28,6 +28,11 @@ Singleton {
         imageSupported: true
         persistenceSupported: true
 
-        onNotification: notification => notification.tracked = !root.dnd || notification.urgency === NotificationUrgency.Critical
+        onNotification: notification => {
+            // niri announces every screenshot; it's already in the clipboard history.
+            if (notification.appName === "niri" && notification.summary === "Screenshot captured")
+                return;
+            notification.tracked = !root.dnd || notification.urgency === NotificationUrgency.Critical;
+        }
     }
 }
